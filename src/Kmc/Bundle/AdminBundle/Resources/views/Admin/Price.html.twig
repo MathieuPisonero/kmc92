@@ -1,0 +1,84 @@
+{% extends 'KmcAdminBundle::layout.html.twig' %}
+ 
+{% block menu %}
+    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{% endblock %}
+
+{% block title %}Gestion des tarifs{% endblock %}
+
+{% block breadcrum %}<a href="#" class="current">Gestion des tarifs</a>{% endblock %}
+
+{% block content %}
+{% if modif %}
+<div class="row-fluid">
+	<div class="span12">
+		<div class="alert alert-success">
+			<button class="close" data-dismiss="alert">×</button>
+			La mise à jour a été effectuée avec succés.
+		</div>
+	</div>
+</div>
+{% endif %}
+<form name="kmc_admin_city" method="post" action="" class="form-horizontal ui-formwizard">
+<div class="widget-box">
+	<div class="widget-content nopadding">
+		<table class="table table-bordered table-striped table-hover">
+			<thead>
+				<tr>
+					<th>Actif</th>
+					<th>Déscription</th>
+					<th>Tarif</th>
+					<th></th>
+
+				</tr>
+			</thead>
+			<tbody>
+			{% for price in prices  %}
+				<tr>
+					<td><input type="checkbox" {% if price.active %}checked="checked" {% endif %}value="{{price.id}}" name="active_id[]"/></td>
+					<td>{{ price.name }}</td>
+					<td>{{ price.price}}</td>
+					<td><a href="#form_tarid_{{price.id}}" data-toggle="modal" class="btn btn-primary">Editer</a></td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>					
+	</div>
+</div>
+<button type="submit" class="btn btn-primary">Mettre à jour</button>
+<a type="button" class="btn btn-primary" href="{{ path('kmc_admin_pricenew')}}">Ajouter un tarif</a>
+</form>
+
+{% for form in forms %}
+<div id="form_tarid_{{form[0]}}" class="modal hide">
+	<div class="modal-header">
+		<button data-dismiss="modal" class="close" type="button">×</button>
+		<h3>Modifier le tarif</h3>
+	</div>
+	<div class="modal-body">
+		<div class="widget-content nopadding">
+	        <form name="kmc_admin_season" method="post" action="" class="form-horizontal ui-formwizard" novalidate="novalidate">
+	            <input type="hidden" name="tarif_id" value="{{form[0]}}" />
+	            <div class="control-group">
+                	<label class="control-label">{{ form_label(form[1].name) }}</label>
+                    <div class="controls">
+                    	{{ form_widget(form[1].name) }}
+                    </div>
+                 </div>
+                 <div class="control-group">
+                	<label class="control-label">{{ form_label(form[1].price) }}</label>
+                    <div class="controls">
+                    	{{ form_widget(form[1].price) }}
+                    </div>
+                 </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+	        </form>
+		</div>
+	</div>
+</div>
+{% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,148 @@
+<?php
+
+namespace Kmc\Bundle\KmcBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * InformationSubscription
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class InformationSubscription
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Subscription", inversedBy="informations")
+     * @ORM\JoinColumn(name="subscription", referencedColumnName="id")
+     **/
+    private $subscription;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="InformationQuestion")
+     **/
+    private $question;
+
+    /**
+     * @ORM\ManyToOne (targetEntity="InformationAnswer")
+     **/
+    private $answer;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="custom", type="string", length=255, nullable=true)
+     */
+    private $custom;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set member
+     *
+     * @param \Kmc\Bundle\KmcBundle\Entity\Subscription $subscription
+     * @return InformationSubscription
+     */
+    public function setSubscription(\Kmc\Bundle\KmcBundle\Entity\Subscription $subscription = null)
+    {
+        $this->subscription = $subscription;
+
+        return $this;
+    }
+
+
+    /**
+     * Get member
+     *
+     * @return \Kmc\Bundle\KmcBundle\Entity\Subscription
+     */
+    public function getSubscription()
+    {
+        return $this->subscription;
+    }
+
+    /**
+     * Set answer
+     *
+     * @param \Kmc\Bundle\KmcBundle\Entity\InformationAnswer $answer
+     * @return InformationSubscription
+     */
+    public function setAnswer(\Kmc\Bundle\KmcBundle\Entity\InformationAnswer $answer = null)
+    {
+        $this->answer = $answer;
+
+        return $this;
+    }
+
+    /**
+     * Get answer
+     *
+     * @return \Kmc\Bundle\KmcBundle\Entity\InformationAnswer 
+     */
+    public function getAnswer()
+    {
+        return $this->answer;
+    }
+
+    /**
+     * Add question
+     *
+     * @param \Kmc\Bundle\KmcBundle\Entity\InformationQuestion $question
+     * @return InformationSubscription
+     */
+    public function setQuestion(\Kmc\Bundle\KmcBundle\Entity\InformationQuestion $question = null)
+    {
+        $this->question = $question;
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return \Kmc\Bundle\KmcBundle\Entity\InformationQuestion 
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * Set custom
+     *
+     * @param string $custom
+     * @return InformationSubscription
+     */
+    public function setCustom($custom)
+    {
+        $this->custom = $custom;
+
+        return $this;
+    }
+
+    /**
+     * Get custom
+     *
+     * @return string 
+     */
+    public function getCustom()
+    {
+        return $this->custom;
+    }
+}

@@ -1,0 +1,4 @@
+Civilité;Nom;Prenom;e-mail;Date de naissance;Age;Télephone;Profesion;Adresse;CP;Ville;Année de pratique;Ceinture
+{% for subscription in subscriptions %}
+    {% if subscription.civility == 0 %}Melle{% elseif subscription.civility == "1" %}Me{% else %}M{% endif %};{{ subscription.lastname|raw}};{{ subscription.firstname|raw }};{{ subscription.email|raw }};{{ subscription.birthdate|date('d/m/Y') }};{{ subscription.getAge }};{{ subscription.phone|raw }};{{ subscription.job|raw }};{{ subscription.adress|raw }};{{ subscription.zipcode }};{{ subscription.city|raw }};{{ subscription.practiceyear }};{{ subscription.practicelevel }}
+{% endfor %}

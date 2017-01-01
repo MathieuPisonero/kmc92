@@ -1,0 +1,16 @@
+{% extends 'KmcKmcBundle::layout_subscription.html.twig' %}
+{% block content %}
+
+<script src="{{ asset('bundles/kmckmc/js/jquery.js') }}"></script>
+<div id="stylized" class="myform">
+    <h2>Votre inscription est maintenant enregistrée !!</h2>
+    <p>
+        Vous allez bientôt recevoir un mail contenant les documents à imprimer afin de constituer votre dossier d'inscription. Une fois complet, vous pouvez l'apporter au club lors de votre premier cours pour valider votre inscription et commencer l'entrainement si vous êtes équipés des protections obligatoires.<br/><br/>
+        <span style="font-weight:bold;font-size:10px">Pensez à consulter le dossier "Courrier indésirable" (spam) si vous ne trouvez pas cet email dans votre boîte de réception.</span>
+    </p>
+    <p>Merci et a trés bientôt pour l'entrainement !!</p>
+    <!--div>
+        <button type="button" onclick="window.location.href='http://www.kmc92.fr'" class="button1">Retour à l'accueil</button>
+    </div-->
+</div>
+{% endblock %}

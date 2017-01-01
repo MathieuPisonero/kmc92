@@ -1,0 +1,5 @@
+_kmc: 
+    resource: "@KmcKmcBundle/Resources/config/routing.yml"
+
+_kmcadmin:
+    resource: "@KmcAdminBundle/Resources/config/routing.yml"

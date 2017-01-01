@@ -1,0 +1,78 @@
+kmc_admin_homepage:
+    path:  /admin
+    defaults: { _controller: KmcAdminBundle:Admin:Index }
+kmc_admin_season:
+    path:  /admin/season
+    defaults: { _controller: KmcAdminBundle:Admin:Season }
+kmc_admin_seasonedit:
+    path:  /admin/seasonedit/{id}
+    defaults: { _controller: KmcAdminBundle:Admin:SeasonEdit }
+kmc_admin_seasonnew:
+    path:  /admin/seasonnew
+    defaults: { _controller: KmcAdminBundle:Admin:SeasonNew }
+kmc_admin_price:
+    path:  /admin/price
+    defaults: { _controller: KmcAdminBundle:Admin:Price }
+kmc_admin_pricenew:
+    path:  /admin/pricenew
+    defaults: { _controller: KmcAdminBundle:Admin:PriceNew }
+kmc_admin_subscriptionlist:
+    path:  /admin/subscriptionlist
+    defaults: { _controller: KmcAdminBundle:Admin:SubscriptionList}
+kmc_admin_subscriptioncsvlist:
+    path:  /admin/subscriptioncsvlist/{season}
+    defaults: { _controller: KmcAdminBundle:Admin:SubscriptionCSVList }
+kmc_admin_clublist:
+    path:  /admin/clublist
+    defaults: { _controller: KmcAdminBundle:Admin:ClubList }
+kmc_admin_clubedit:
+    path:  /admin/clubedit/{id}
+    defaults: { _controller: KmcAdminBundle:Admin:clubedit }
+kmc_admin_information_list:
+    path:  /admin/informationlist/
+    defaults: { _controller: KmcAdminBundle:Admin:informationList }
+kmc_admin_information_edit:
+    path:  /admin/informationedit/{id}
+    defaults: { _controller: KmcAdminBundle:Admin:informationEdit }
+kmc_admin_information_result:
+    path:  /admin/informationresult
+    defaults: { _controller: KmcAdminBundle:Admin:informationResult }
+kmc_admin_information_chartdata:
+    path:  /admin/informationchartdata/{season_id}/{question_id}
+    defaults: { _controller: KmcAdminBundle:Admin:informationChartData }
+kmc_admin_information_chartcustomdata:
+    path:  /admin/informationchartcustomdata/{season_id}/{question_id}/{answer_id}
+    defaults: { _controller: KmcAdminBundle:Admin:informationChartCustomData }
+kmc_admin_information_new:
+    path:  /admin/informationnew
+    defaults: { _controller: KmcAdminBundle:Admin:informationNew }
+kmc_admin_convert_subscription:
+    path:  /admin/convertsubscription/{subscription_id}
+    defaults: { _controller: KmcAdminBundle:Admin:ConvertToMenber }
+kmc_admin_member_card:
+    path:  /admin/membercard/{member_id}
+    defaults: { _controller: KmcAdminBundle:Admin:MemberCard }
+kmc_admin_member_list_card:
+    path:  /admin/memberlistcard/
+    defaults: { _controller: KmcAdminBundle:Admin:MemberListCard }
+kmc_admin_member_new_card:
+    path:  /admin/membernewcard/
+    defaults: { _controller: KmcAdminBundle:Admin:MemberNewCard }
+kmc_admin_member_edit_card:
+    path:  /admin/membereditcard/{member_id}
+    defaults: { _controller: KmcAdminBundle:Admin:MemberEditCard }
+kmc_admin_member_facture:
+    path:  /admin/memberfacture/{member_id}/{season_id}
+    defaults: { _controller: KmcAdminBundle:Admin:MemberFacture}
+kmc_admin_member_export:
+    path:  /admin/memberexportlist/{season_id}/{grade_id}/{minor}
+    defaults: { _controller: KmcAdminBundle:Admin:MemberExportList}
+kmc_admin_stage:
+    path:  /admin/stage
+    defaults: { _controller: KmcAdminBundle:Stage:List}
+kmc_admin_stage_edit:
+    path:  /admin/stage/edit/{stageId}
+    defaults: { _controller: KmcAdminBundle:Stage:Edit}
+kmc_admin_stage_new:
+    path:  /admin/stage/new
+    defaults: { _controller: KmcAdminBundle:Stage:New}

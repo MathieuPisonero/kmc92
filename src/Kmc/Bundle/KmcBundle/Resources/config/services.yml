@@ -1,0 +1,7 @@
+parameters:
+#    kmc_kmc.example.class: Kmc\Bundle\KmcBundle\Example
+
+services:
+#    kmc_kmc.example:
+#        class: %kmc_kmc.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

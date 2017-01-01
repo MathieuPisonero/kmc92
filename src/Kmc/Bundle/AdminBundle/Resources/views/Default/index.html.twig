@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Unicorn Admin</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/bundles/kmcadmin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/bundles/kmcadmin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="/bundles/kmcadmin/css/fullcalendar.css" />
+    <link rel="stylesheet" href="/bundles/kmcadmin/css/unicorn.main.css" />
+    <link rel="stylesheet" href="/bundles/kmcadmin/css/unicorn.grey.css" class="skin-color" />
+</head>
+<body>
+<div id="header">
+    <h1><a href="./dashboard.html">Unicorn Admin</a></h1>
+</div>
+<div id="search">
+    <input type="text" placeholder="Search here..."/><button type="submit" class="tip-right" title="Search"><i class="icon-search icon-white"></i></button>
+</div>
+<div id="user-nav" class="navbar navbar-inverse">
+    <ul class="nav btn-group">
+        <li class="btn btn-inverse" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>
+        <li class="btn btn-inverse dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-fire"></i> <span class="text">Mes Projets</span> <span class="label label-important">5</span> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a class="sAdd" title="" href="#">new message</a></li>
+                <li><a class="sInbox" title="" href="#">inbox</a></li>
+                <li><a class="sOutbox" title="" href="#">outbox</a></li>
+                <li><a class="sTrash" title="" href="#">trash</a></li>
+            </ul>
+        </li>
+        <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
+        <li class="btn btn-inverse"><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+    </ul>
+</div>
+
+<div id="sidebar">
+    <a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
+    <ul style="display: block;">
+        <li ><a href="index.html"><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
+        <li  class="submenu open active">
+            <a href="#"><i class="icon icon-th-list"></i> <span>Saison</span></a>
+            <ul>
+                <li class="active"><a href="form-common.html">Tarif saison</a></li>
+                <li><a href="form-validation.html">Validation</a></li>
+                <li><a href="form-wizard.html">Wizard</a></li>
+            </ul>
+        </li>
+        <li><a href="buttons.html"><i class="icon icon-tint"></i> <span>Buttons &amp; icons</span></a></li>
+        <li><a href="interface.html"><i class="icon icon-pencil"></i> <span>Interface elements</span></a></li>
+        <li><a href="tables.html"><i class="icon icon-th"></i> <span>Tables</span></a></li>
+        <li><a href="grid.html"><i class="icon icon-th-list"></i> <span>Grid Layout</span></a></li>
+        <li class="submenu">
+            <a href="#"><i class="icon icon-file"></i> <span>Sample pages</span> <span class="label">4</span></a>
+            <ul>
+                <li><a href="invoice.html">Invoice</a></li>
+                <li><a href="chat.html">Support chat</a></li>
+                <li><a href="calendar.html">Calendar</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="charts.html"><i class="icon icon-signal"></i> <span>Charts &amp; graphs</span></a>
+        </li>
+        <li>
+            <a href="widgets.html"><i class="icon icon-inbox"></i> <span>Widgets</span></a>
+        </li>
+    </ul>
+</div>
+
+<div id="content">
+    <div id="content-header">
+        <h1>Dashboard</h1>
+        <div class="btn-group">
+            <a class="btn btn-large tip-bottom" title="Manage Files"><i class="icon-file"></i></a>
+            <a class="btn btn-large tip-bottom" title="Manage Users"><i class="icon-user"></i></a>
+            <a class="btn btn-large tip-bottom" title="Manage Comments"><i class="icon-comment"></i><span class="label label-important">5</span></a>
+            <a class="btn btn-large tip-bottom" title="Manage Orders"><i class="icon-shopping-cart"></i></a>
+        </div>
+    </div>
+    <div id="breadcrumb">
+        <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+        <a href="#" class="current">Dashboard</a>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+                            <span class="icon">
+                                <i class="icon-align-justify"></i>
+                            </span>
+                        <h5>Text inputs</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form action="#" method="get" class="form-horizontal ui-formwizard">
+                            <div class="control-group">
+                                <label class="control-label"><label for="kmc_admin_season_name" class="required">Nom</label></label>
+                                <div class="controls">
+                                    <input type="text" id="kmc_admin_season_name" name="kmc_admin_season[name]" required="required" value="Saison 2014-2015" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label"><label for="kmc_admin_season_price" class="required">Tarif de la saison</label></label>
+                                <div class="controls">
+                                    <input type="text" id="kmc_admin_season_price" name="kmc_admin_season[price]" required="required" value="450" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label"><label for="kmc_admin_season_halfprice" class="required">Tarif aprés le 1er Janvier saison</label></label>
+                                <div class="controls">
+                                    <input type="text" id="kmc_admin_season_halfprice" name="kmc_admin_season[halfprice]" required="required" value="210" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label"><label class="required">Début de la saison</label></label>
+                                <div class="controls">
+                                    <select>
+                                        <option>First option</option>
+                                        <option>Second option</option>
+                                        <option>Third option</option>
+                                        <option>Fourth option</option>
+                                        <option>Fifth option</option>
+                                        <option>Sixth option</option>
+                                        <option>Seventh option</option>
+                                        <option>Eighth option</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label"><label class="required">Fin de la saison</label></label>
+                                <div class="controls">
+                                    <select id="kmc_admin_season_seasonend_year" name="kmc_admin_season[seasonend][year]"><option value="2009">
+                                            2009
+                                        </option><option value="2010">
+                                            2010
+                                        </option><option value="2011">
+                                            2011
+                                        </option><option value="2012">
+                                            2012
+                                        </option><option value="2013">
+                                            2013
+                                        </option><option value="2014">
+                                            2014
+                                        </option><option value="2015" selected="selected">
+                                            2015
+                                        </option><option value="2016">
+                                            2016
+                                        </option><option value="2017">
+                                            2017
+                                        </option><option value="2018">
+                                            2018
+                                        </option><option value="2019">
+                                            2019
+                                        </option></select><select id="kmc_admin_season_seasonend_month" name="kmc_admin_season[seasonend][month]"><option value="1">
+                                            Jan
+                                        </option><option value="2">
+                                            Feb
+                                        </option><option value="3">
+                                            Mar
+                                        </option><option value="4">
+                                            Apr
+                                        </option><option value="5" selected="selected">
+                                            May
+                                        </option><option value="6">
+                                            Jun
+                                        </option><option value="7">
+                                            Jul
+                                        </option><option value="8">
+                                            Aug
+                                        </option><option value="9">
+                                            Sep
+                                        </option><option value="10">
+                                            Oct
+                                        </option><option value="11">
+                                            Nov
+                                        </option><option value="12">
+                                            Dec
+                                        </option></select><select id="kmc_admin_season_seasonend_day" name="kmc_admin_season[seasonend][day]"><option value="1">
+                                            1
+                                        </option><option value="2">
+                                            2
+                                        </option><option value="3">
+                                            3
+                                        </option><option value="4">
+                                            4
+                                        </option><option value="5">
+                                            5
+                                        </option><option value="6">
+                                            6
+                                        </option><option value="7">
+                                            7
+                                        </option><option value="8">
+                                            8
+                                        </option><option value="9">
+                                            9
+                                        </option><option value="10">
+                                            10
+                                        </option><option value="11">
+                                            11
+                                        </option><option value="12">
+                                            12
+                                        </option><option value="13">
+                                            13
+                                        </option><option value="14">
+                                            14
+                                        </option><option value="15">
+                                            15
+                                        </option><option value="16">
+                                            16
+                                        </option><option value="17">
+                                            17
+                                        </option><option value="18">
+                                            18
+                                        </option><option value="19">
+                                            19
+                                        </option><option value="20">
+                                            20
+                                        </option><option value="21">
+                                            21
+                                        </option><option value="22">
+                                            22
+                                        </option><option value="23">
+                                            23
+                                        </option><option value="24">
+                                            24
+                                        </option><option value="25">
+                                            25
+                                        </option><option value="26">
+                                            26
+                                        </option><option value="27">
+                                            27
+                                        </option><option value="28">
+                                            28
+                                        </option><option value="29">
+                                            29
+                                        </option><option value="30">
+                                            30
+                                        </option><option value="31" selected="selected">
+                                            31
+                                        </option></select>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/bundles/kmcadmin/js/jquery.min.js"></script>
+<script src="/bundles/kmcadmin/js/jquery-ui.custom.js"></script>
+<script src="/bundles/kmcadmin/js/bootstrap.min.js"></script>
+<script src="/bundles/kmcadmin/js/bootstrap-colorpicker.js"></script>
+<script src="/bundles/kmcadmin/js/bootstrap-datepicker.js"></script>
+<script src="/bundles/kmcadmin/js/jquery.uniform.js"></script>
+<script src="/bundles/kmcadmin/js/select2.min.js"></script>
+<script src="/bundles/kmcadmin/js/unicorn.js"></script>
+<script src="/bundles/kmcadmin/js/unicorn.form_common.js"></script>
+</body>
+</html>

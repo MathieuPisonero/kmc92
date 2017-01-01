@@ -1,0 +1,48 @@
+{% block content %}
+ <p class="amount-word" style="margin-top:-5px;margin-bottom:10px">
+ 	<span>{% if member.civility == 0 %}Melle{% elseif member.civility == "1" %}Me{% else %}M{% endif %} {{member.lastname}} {{member.firstname}}</span>
+</p>
+<ul style="margin-top:5px">
+	<li>Email : {{member.email}}</li>
+	<li>Date de naissance : {{member.birthdate|date('d/m/y')}}</li>
+	<li>Age : {{member.getAge()}}</li>
+	{% if member.major == 0 %}
+		<li>
+		<span style="color:red">Ce membre est mineur</span>, informations du tuteur légal : 
+		<ul>
+			<li>Nom : {{member.responsablelastname}}</li>
+			<li>Prenom : {{member.responsablefirstname}}</li>
+		</ul>
+		</li>
+	{% endif %}
+	<li>Année de pratique : {{member.practiceyear}}</li>
+	<li>Grade : {{member.praticelevel}}</li>
+	<li>Profession : {{member.job}}</li>
+	<li>Téléphone : {{member.phone}}</li>
+	<li>Adresse : 
+		<ul style="list-style:none;">
+			<li>{{member.adress}}</li>
+			<li>{{member.zipcode}} {{member.city}}</li>
+		</ul>
+	</li>
+</ul>
+<a type="button" href="{{ path('kmc_admin_member_edit_card',{ 'member_id': member.id }) }}" class="btn btn-primary btn-mini" ">Editer fiche</a>
+<table class="table table-bordered table-striped table-hover" style="margin-top:15px">
+<thead>
+	<tr>
+    	<th>Saison</th>
+        <th>tarif</th>
+        <th></th>
+    </tr>
+</thead>
+<tbody>
+	{% for season in member.seasons%}
+	<tr>
+		<td>{{season.season.name}}</td>
+		<td>{{season.price.price}} €</td>
+		<td style="width:20%"><a type="button" href="{{ path('kmc_admin_member_facture',{ 'member_id': member.id, 'season_id' : season.id }) }}" class="btn btn-primary btn-mini" ">Editer Facture</a></td>
+	<tr>
+	{% endfor%}	
+</tbody>		
+</table>
+{% endblock %}

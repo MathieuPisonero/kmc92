@@ -1,0 +1,21 @@
+kmc_subscription_step1:
+    path: /
+    defaults: { _controller: KmcKmcBundle:Subscription:step1 }
+kmc_subscription_step1d:
+    path: /subscription/step1
+    defaults: { _controller: KmcKmcBundle:Subscription:step1 }
+kmc_subscription_step2:
+    path: /subscription/step2
+    defaults: { _controller: KmcKmcBundle:Subscription:step2 }
+kmc_subscription_step3:
+    path: /subscription/step3
+    defaults: { _controller: KmcKmcBundle:Subscription:Step3 }
+kmc_subscription_step4:
+    path: /subscription/step4
+    defaults: { _controller: KmcKmcBundle:Subscription:Step4 }
+kmc_subscription_confirm:
+    path: /subscription/confirm
+    defaults: { _controller: KmcKmcBundle:Subscription:Confirm }
+kmc_stage_home:
+    path: /stage/{key_stage}
+    defaults: { _controller: KmcKmcBundle:Stage:Index }

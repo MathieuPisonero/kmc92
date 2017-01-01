@@ -1,0 +1,137 @@
+{% extends 'KmcAdminBundle::layout.html.twig' %}
+{% form_theme form 'KmcAdminBundle:Form:season.html.twig' %}
+
+{% block menu %}
+    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{% endblock %}
+
+{% block title %}Création d'un membre{% endblock %}
+
+{% block breadcrum %}<a href="{{ path('kmc_admin_member_list_card') }}" >Gestion des membres</a> <a href="#" class="current">Création d'un membre</a>{% endblock %}
+
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                            <span class="icon">
+                                <i class="icon-align-justify"></i>
+                            </span>
+                <h5>Modifier la fiche d'un membre</h5>
+            </div>
+           <div class="widget-content nopadding">
+	       <form name="kmc_new_member" method="post" action="" class="form-horizontal ui-formwizard">
+                <input type="hidden" name="createCard" value="createCard">
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(form.civility) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.civility) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(form.lastname) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.lastname) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(form.firstname) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.firstname) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(form.email) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.email) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(form.phone) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.phone) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(form.job) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.job) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(form.birthdate) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.birthdate) }}
+                        <input type='hidden' id="input_major" value="major" name="major">
+                    </div>
+                    <div class="alert alert-error" id="minor15">
+							<strong>Attention</strong> ce menbre à moins de 15 ans. Il ne peut pas être inscrit...
+					</div>
+                </div>
+                <div class="control-group" id="responsable_lastname_group">
+                	<div class="alert" id="minor18">
+							<strong>Attention</strong> ce menbre à moins de 18 ans. Les informations sur son tuteur légal doivent être remplies...
+					</div>
+                    <label class="control-label">{{ form_label(form.responsablelastname) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.responsablelastname) }}
+                    </div>
+                </div>
+                <div class="control-group" id="responsable_firstname_group">
+                    <label class="control-label">{{ form_label(form.responsablefirstname) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.responsablefirstname) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(form.adress) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.adress) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(form.zipcode) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.zipcode) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(form.city) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.city) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(form.practiceyear) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.practiceyear) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(form.praticelevel) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.praticelevel) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(form.seasons[0].price) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.seasons[0].price) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(form.seasons[0].season) }}</label>
+                    <div class="controls">
+                        {{ form_widget(form.seasons[0].season) }}
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>      
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

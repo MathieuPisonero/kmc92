@@ -1,0 +1,39 @@
+{% extends 'KmcAdminBundle::layout.html.twig' %}
+
+{% block menu %}
+    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{% endblock %}
+
+{% block title %}Création d'une question{% endblock %}
+
+{% block breadcrum %}<a href="{{ path('kmc_admin_information_list') }}" >Gestion du questionnaire</a> <a href="#" class="current">Création d'une question</a>{% endblock %}
+
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                            <span class="icon">
+                                <i class="icon-align-justify"></i>
+                            </span>
+                <h5>Information sur la session en cours</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form name="kmc_admin_information" method="post" action="" class="form-horizontal ui-formwizard">
+                    <div class="control-group">
+                        <label class="control-label">{{ form_label(form.text) }}</label>
+                        <div class="controls">
+                            {{ form_widget(form.text) }}
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        <button type="button" class="btn btn-danger" onclick="window.location='{{ path('kmc_admin_information_list') }}';">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

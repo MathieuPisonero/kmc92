@@ -1,0 +1,45 @@
+{% extends 'KmcAdminBundle::layout.html.twig' %}
+ 
+{% block menu %}
+    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{% endblock %}
+
+{% block title %}Ajouter une saison{% endblock %}
+
+{% block breadcrum %}<a href="#" class="current">Gestion des saisons</a>{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span12">
+        <button type="button" class="btn btn-primary" onclick="window.location='{{ path('kmc_admin_seasonnew') }}';">Ajouter une saison</button>
+            <div class="widget-box">
+                <div class="widget-title">
+
+                    <h5>Liste des Sasisons</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Date début</th>
+                            <th>Date fin</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for season in seasons %}
+                            <tr class="gradeX">
+                                <td>{{ season.name }}</td>
+                                <td>{{ season.seasonstart|date("m/d/Y")  }}</td>
+                                <td>{{ season.seasonend|date("m/d/Y")  }}</td>
+                                <td style="width:2%;text-align:center"><button type="button" class="btn btn-primary" onclick="window.location='{{ path('kmc_admin_seasonedit', { 'id': season.id }) }}';">Editer</button></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

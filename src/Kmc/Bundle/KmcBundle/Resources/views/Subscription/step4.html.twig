@@ -1,0 +1,95 @@
+{% extends 'KmcKmcBundle::layout_subscription.html.twig' %}
+
+{% block content %}
+    <div id="stylized" class="myform">
+        <h1><span class="active" >Vos informations</span> <span class="active">></span> <span class="active">Mode de paiement</span> <span class="active">></span> <span class="active">Pour en savoir plus sur vous</span>  <span class="active">></span> <span class="active" style="text-decoration:underline;">Finalisation</span></h1>
+        <p>Avant de finaliser votre inscription verifier que vos informations soient correctes</p>
+        <label class="mode1" for="kmc_member_club">Votre club de ratachement : </label>
+        <div style="margin-left:50px;float:left;width:250px;margin-bottom:20px">
+            {{ club.name }}
+        </div>
+        <label class="mode1" for="kmc_member_civility">Civlité : </label>
+        <div style="margin-left:50px;float:left;width:250px;margin-bottom:20px">
+            {% if subscription.civility == 0 %}Melle{% endif%}
+            {% if subscription.civility == 1 %}Me.{% endif%}
+            {% if subscription.civility == 2 %}M.{% endif%}
+        </div>
+        <label class="mode1" for="kmc_member_lastname">Nom : </label>
+        <div style="margin-left:50px;float:left;width:250px;margin-bottom:20px">
+            {{ subscription.lastname }}
+        </div>
+        <label class="mode1" for="kmc_member_lastname">Prenom : </label>
+        <div style="margin-left:50px;float:left;width:250px;margin-bottom:20px">
+            {{ subscription.firstname }}
+        </div>
+        <label class="mode1" for="Email">Email : </label>
+        <div style="margin-left:50px;float:left;width:250px;margin-bottom:20px">
+            {{ subscription.email }}
+        </div>
+        <label class="mode1" for="Telephone">Téléphone : </label>
+        <div style="margin-left:50px;float:left;width:250px;margin-bottom:20px">
+            {{ subscription.phone }}
+        </div>
+        <label class="mode1" for="Profession">Profession : </label>
+        <div style="margin-left:50px;float:left;width:250px;margin-bottom:20px">
+            {{ subscription.job }}
+        </div>
+        <label class="mode1" for="Naissance">Date de naissance: </label>
+        <div style="margin-left:50px;float:left;width:250px;margin-bottom:20px">
+            {{ birthdate }}
+        </div>
+        {% if subscription.major == 0 %}
+            <label class="mode1" for="Naissance">Nom du tuteur légal </label>
+            <div style="margin-left:50px;float:left;width:250px;margin-bottom:20px">
+                {{ subscription.responsablelastname }}
+            </div>
+            <label class="mode1" for="Naissance">Prenom du tuteur légal </label>
+            <div style="margin-left:50px;float:left;width:250px;margin-bottom:20px">
+                {{ subscription.responsablefirstname }}
+            </div>
+        {% endif %}
+        <div id="minor_info" style="border: 2px solid red; float: left; margin-bottom: 15px; margin-left:200px;display: none;">
+            <p style="float:left;margin-left: auto;margin-rigth:auto;border:none;padding-left:30px;padding-right:30px;padding-top:15px" >
+                Nous sommes désolés il faut avoir au moins 15ans pour pouvoir s'inscrire
+            </p>
+
+        </div>
+        <label class="mode1" for="Adresse">Adresse postale : </label>
+        <div style="margin-left:50px;float:left;width:250px;margin-bottom:20px">
+            {{ subscription.adress }}
+        </div>
+        <label class="mode1" for="CodePostal">Ville : </label>
+        <div style="margin-left:50px;float:left;width:250px;margin-bottom:20px">
+            {{ subscription.city }}
+        </div>
+        <label class="mode1" for="CodePostal">Code Postal : </label>
+        <div style="margin-left:50px;float:left;width:250px;margin-bottom:20px">
+            {{ subscription.zipcode }}
+        </div>
+        <label class="mode1" for="CodePostal">Année de pratique : </label>
+        <div style="margin-left:50px;float:left;width:250px;margin-bottom:20px">
+            {{ subscription.practiceyear }} an{% if(subscription.practiceyear>1) %}s{% endif %}
+        </div>
+        <label class="mode1" for="CodePostal">grade actuel : </label>
+        <div style="margin-left:50px;float:left;width:250px;margin-bottom:20px">
+            {{ subscription.practicelevel }}
+        </div>
+    <div style="margin-left: 50px">
+    <label class="mode2" style="float:left;width:700px">Le montant de la cotisation est de {{ tabPrice.0.total }}€</label>
+    <label class="mode2" style="float:left;width:700px;margin-bottom:30px">Vous avez choissez de payer cette sommes en {{ subscription.payment.name }}.
+        {%  if (subscription.payment.bankcheck)  %}
+            {%  if (subscription.payment.Numberpayment == 1)  %}
+                </br>Veuillez établir l'ordre du chéque à <b>{{ club.name }}</b></label>
+            {% else %}
+                </br>Veuillez établir l'ordre des chéque à <b>{{ club.name }}</b>
+                ({%  for tprice in tabPrice %}{{ tprice.num }} de {{ tprice.val }}€{% if not loop.last %}, {%  endif %} {% endfor %})</label>
+            {% endif %}
+        {%  endif %}
+    </div>
+    {{ form_start(form) }}
+        <div style="margin-left:300px;margin-top:50px;">
+            <button type="button" onclick="window.location.href='{{ path('kmc_subscription_step3') }}'" class="button2">Etape précédente</button>
+            {{ form_widget(form.next_step,{ 'attr': {'class': 'button2'} }) }}
+        </div>
+    </div>
+{% endblock %}

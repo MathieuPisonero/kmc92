@@ -1,0 +1,68 @@
+{% extends 'KmcAdminBundle::layout.html.twig' %}
+
+{% block menu %}
+    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{% endblock %}
+
+{% block title %}Résultat du questionnaire{% endblock %}
+
+{% block breadcrum %}<a href="{{ path('kmc_admin_information_list') }}" >Gestion du questionnaire</a> <a href="#" class="current">Résultat du questionnaire</a>{% endblock %}
+
+
+{% block content %}
+<div class="row-fluid">
+	<div class="span12">
+		<div class="widget-box">
+			<div class="widget-content">
+				<form method="post">
+				<div class="control-group">
+                    <input type="hidden" name="filter" value="filer">
+                    <div class="controls" style="margin-right:15px">
+                        <select id="filter_season" name="season" style="width:200px">
+                        	{% for season in seasons %}
+                        	<option value="{{season.id}}" {% if active_season_id == season.id %}selected{% endif %}>{{season.name}}</option>
+                        	{% endfor%}
+                        </select>
+                    </div>
+                    <div class="controls" style="margin-top:15px;margin-bottom:15px;">
+                        <select id="filter_question" name="question" style="width:100%">
+                        	{% for question in questions %}
+                        	<option value="{{question.id}}">{{question.text}}{% if question.active == 0 %} (désactivée){% endif %}</option>
+                        	{% endfor%}
+                        </select>
+                    </div>
+                <button type="button" id="displayChart" class="btn btn-primary">Appliquer les filtres</button>
+				</form>
+			</div>
+		</div>
+	</div>    
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="widget-box">
+			<div class="widget-content">
+				<div class="resultChart"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row-fluid" id="block_select_custom" style="display:none">
+	<select id="custom_answer_select">
+		<option></option>
+	</select>
+	 <button type="button" id="displayCustom" class="btn btn-primary">Afficher les réponses personnalisées</button>
+</div>
+<div class="row-fluid" id="block_display_custom" style="display:none">
+	<div class="span12">
+		<div class="widget-box">
+			<div class="widget-title">
+				<h5>Réponses personalisées</h5>
+			</div>
+			<div class="widget-content" id="custom_content">
+			
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

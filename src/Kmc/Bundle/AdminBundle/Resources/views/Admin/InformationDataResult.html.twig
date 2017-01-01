@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data_result>
+{% for result in results %}
+	<result>
+		<question_id>{{result.0}}</question_id>
+		<question_text>{{result.1}}</question_text>
+		{% for anwser in result.2 %}
+		<data_answer>
+			<answer_id>{{anwser.id}}</answer_id>
+			<answer_text>{{anwser.text}}</answer_text>
+			<answer_number>{{anwser.nb}}</answer_number>
+		</data_answer>
+		{% endfor %}
+	</result>
+{% endfor %}
+</data_result>

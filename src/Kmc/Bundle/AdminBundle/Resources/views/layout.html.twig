@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>KMC 92 Admin</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/bootstrap.min.css')}}" />
+        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/bootstrap-responsive.min.css')}}" />
+        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/colorpicker.css')}}" />
+        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/datepicker.css')}}" />
+        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/uniform.css')}}" />
+        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/select2.css')}}" />
+        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/fullcalendar.css')}}" />
+        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/unicorn.main.css')}}" />
+        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/unicorn.grey.css')}}" class="skin-color" />
+    </head>
+    <body>
+        <div id="header">
+            <h1><a href="{{ path('kmc_admin_homepage') }}">KMC 92 Admin</a></h1>
+        </div>		
+
+        <div id="sidebar">
+            <a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
+            {% block menu %}{% endblock %}
+        </div>
+
+        <div id="content">
+            <div id="content-header">
+                <h1>{% block title %}{% endblock %}</h1>
+            </div>
+            <div id="breadcrumb">
+                <a href="{{ path('kmc_admin_homepage') }}" title="Retour accueil" class="tip-bottom"><i class="icon-home"></i> Accueil</a>
+                {% block breadcrum %}{% endblock %}
+            </div>
+            <div class="container-fluid">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+
+        <script src="{{ asset('bundles/kmcadmin/js/jquery.min.js')}}"></script>
+        <script src="{{ asset('bundles/kmcadmin/js/jquery-ui.custom.js')}}"></script>
+        <script src="{{ asset('bundles/kmcadmin/js/bootstrap.min.js')}}"></script>
+        <script src="{{ asset('bundles/kmcadmin/js/bootstrap-colorpicker.js')}}"></script>
+        <script src="{{ asset('bundles/kmcadmin/js/bootstrap-datepicker.js')}}"></script>
+        <script src="{{ asset('bundles/kmcadmin/js/jquery.uniform.js')}}"></script>
+        <script src="{{ asset('bundles/kmcadmin/js/jquery.dataTables.min.js')}}"></script>
+        <script src="{{ asset('bundles/kmcadmin/js/select2.min.js')}}"></script>
+        <script src="{{ asset('bundles/kmcadmin/js/jquery.flot.min.js')}}"></script>
+        <script src="{{ asset('bundles/kmcadmin/js/jquery.flot.pie.min.js')}}"></script>
+        <script src="{{ asset('bundles/kmcadmin/js/jquery.flot.resize.min.js')}}"></script>
+        <script src="{{ asset('bundles/kmcadmin/js/unicorn.js')}}"></script>
+        <script src="{{ asset('bundles/kmcadmin/js/unicorn.form_common.js')}}"></script>
+        <script src="{{ asset('bundles/kmcadmin/js/unicorn.tables.js')}}"></script>
+        <script src="{{ asset('bundles/kmcadmin/js/main.js')}}"></script>
+    </body>
+</html>

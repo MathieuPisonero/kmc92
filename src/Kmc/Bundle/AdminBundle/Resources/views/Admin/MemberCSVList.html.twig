@@ -1,0 +1,4 @@
+Civilité;Nom;Prenom;e-mail;Date de naissance;Age;Télephone;Profesion;Adresse;CP;Ville;Année de pratique;Ceinture
+{% for member in members %}
+    {% if member.civility == 0 %}Melle{% elseif member.civility == "1" %}Me{% else %}M{% endif %};{{ member.lastname|raw}};{{ member.firstname|raw }};{{ member.email|raw }};{{ member.birthdate|date('d/m/Y') }};{{ member.getAge }};{{ member.phone|raw }};{{ member.job|raw }};{{ member.adress|raw }};{{ member.zipcode }};{{ member.city|raw }};{{ member.practiceyear }};{{ member.praticelevel }}
+{% endfor %}

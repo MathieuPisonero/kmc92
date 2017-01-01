@@ -1,0 +1,54 @@
+{% extends 'KmcKmcBundle::layout_subscription.html.twig' %}
+{% form_theme form 'KmcKmcBundle:Form:field.html.twig' %}
+{% block content %}
+
+<div id="stylized" class="myform">
+    <form id="subscription_form" name="subscription_form" method="post" action="">
+        {{ form_errors(form) }}
+        <h1><span class="active" style="text-decoration:underline;">Vos informations</span> <span class="active">></span> <span class="inactive">Mode de paiement</span> <span class="inactive">></span> <span class="inactive">Pour en savoir plus sur vous</span>  <span class="inactive">></span> <span class="inactive">Finalisation</span></h1>
+        <p>Renseignez toutes les informations nécessaires à votre inscription</p>
+        <span id="errorspan" class="error2" style="display: none"></span>
+        <label class="mode1" for="civility">Civilité</label>
+        {{ form_widget(form.civility,{ 'attr': {'style': 'float:left;margin-bottom:20px'} }) }}
+        <label class="mode1" for="kmc_member_lastname">Nom<span class="small">Entrez votre nom</span></label>
+        {{ form_widget(form.lastname) }}
+        <label class="mode1" for="Prnom">Prénom<span class="small">Entrez votre prénom</span></label>
+        {{ form_widget(form.firstname) }}
+        <label class="mode1" for="Email">Email<span class="small">Entrez une adresse valide</span></label>
+        {{ form_widget(form.email) }}
+        <label class="mode1" for="Telephone">Téléphone<span class="small">Entrez votre numéro</span></label>
+        {{ form_widget(form.phone) }}
+        <label class="mode1" for="Profession">Profession<span class="small">Entrez votre profession</span></label>
+        {{ form_widget(form.job) }}
+        <label class="mode1" for="Naissance">Date de naissance<span class="small">JJ/MM/AAAA</span></label>
+        {{ form_widget(form.birthdate) }}
+        <div id="responsable_info" style="border: 2px solid red;float:left;margin-bottom:15px;display: none">
+            <p style="float:left;margin-left: auto;margin-rigth:auto;border:none;padding-left:30px;padding-top:15px" >Attention vous êtes mineur, pour valider votre inscritpion nous aurons besoin de l'accord d'un de vos tuteurs légaux</p>
+            <label class="mode1" for="kmc_member_responsablelastname">Nom du tuteur légal</label>
+            {{ form_widget(form.responsablelastname) }}
+            <label class="mode1" for="kmc_member_responsablefirstname">Prenom du tuteur légal</label>
+            {{ form_widget(form.responsablefirstname) }}
+        </div>
+        <div id="minor_info" style="border: 2px solid red; float: left; margin-bottom: 15px; margin-left:200px;display: none;">
+            <p style="float:left;margin-left: auto;margin-rigth:auto;border:none;padding-left:30px;padding-right:30px;padding-top:15px" >
+                Nous sommes désolés il faut avoir au moins 15ans pour pouvoir s'inscrire
+            </p>
+
+        </div>
+        <label class="mode1" for="Adresse">Adresse postale<span class="small">Entrez votre adresse</span></label>
+        {{ form_widget(form.adress) }}
+        <label class="mode1" for="CodePostal">Code Postal<span class="small">Entrez votre code postal</span></label>
+        {{ form_widget(form.zipcode) }}
+        <label class="mode1" for="City">Ville<span class="small">Entrez votre Ville</span></label>
+        {{ form_widget(form.city) }}
+        <label class="mode1" for="practiceyear">Années de pratique<span class="small">Entrez le nombre d'années de pratique de la Kravmaga</span></label>
+        {{ form_widget(form.practiceyear) }}
+        <label class="mode1" for="practicelevel">Grade actuel<span class="small">Selectionnez la couleur de votre ceinture</span></label>
+        {{ form_widget(form.practicelevel) }}
+        {{ form_widget(form.licence) }}
+        {{ form_row(form._token) }}
+        <div>
+            {{ form_widget(form.next_step,{ 'attr': {'class': 'button1'} }) }}
+        </div>
+</div>
+{% endblock %}

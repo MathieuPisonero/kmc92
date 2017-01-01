@@ -1,0 +1,97 @@
+{% extends 'KmcKmcBundle::layout_subscription.html.twig' %}
+{% form_theme form 'KmcKmcBundle:Form:information.html.twig' %}
+{% block content %}
+
+    <div id="stylized" class="myform">
+        <div>
+            <form name="kmc_subscription_informations" id="kmc_subscription_informations" method="post" action="">
+                <h1><span class="active" >Vos informations</span> <span class="active">></span> <span class="active">Mode de paiement</span> <span class="active">></span> <span class="active" style="text-decoration:underline;">Pour en savoir plus sur vous</span>  <span class="active">></span> <span class="inactive">Finalisation</span></h1>
+                <p>Repondez à quelques question afin de mieux vous connaite ! </p>
+            <span id="errorspan" class="error2" style="display: none"></span>
+            {% for information in form.informations %}
+                <div style="float:left;margin-left:150px;margin-bottom:10px">
+                {{ form_label(information.answer) }}
+                {{ form_widget(information.answer, { 'attr': {'class': 'foo'} }) }}
+                {{ form_widget(information.custom ) }}
+                </div>
+            {% endfor %}
+            {{ form_row(form._token) }}
+                    <div style="margin-left:150px">
+                <button type="button" onclick="window.location.href='{{ path('kmc_subscription_step2') }}'" class="button2">Etape précédente</button>
+                {{ form_widget(form.next_step,{ 'attr': {'class': 'button2'} }) }}
+                </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block specialJS %}
+{
+<script type="text/javascript">
+    $( document ).ready(function() {
+        
+        var arrayCustom = [{% for custom in customAnswer %}{% if loop.index0 != 0 %},{% endif %}parseInt({{ custom.article_id }}){% endfor %}];
+        $('.foo').each(function(){
+            var test = parseInt($(this).val());
+            if($.inArray(test, arrayCustom ) != -1)
+            {
+                Expression = new RegExp("\[[0-9]+\]","g");
+                Expression2 = new RegExp("[0-9]","g");
+                Index = Expression.exec($(this).attr('name'));
+                res = Expression2.exec(Index);
+                custom_field_id = 'kmc_subscription_information_informations_'+res+'_custom';
+                $( '#'+custom_field_id ).css('display','block');
+            }
+        });
+
+        $('.foo').change(function(){
+            var anwserId = parseInt($(this).val());
+            //on recupere l'id de la question pour cibler le champ text custom
+            Expression = new RegExp("\[[0-9]+\]","g");
+            Expression2 = new RegExp("[0-9]","g");
+            Index = Expression.exec($(this).attr('name'));
+            res = Expression2.exec(Index);
+            custom_field_id = 'kmc_subscription_informations_informations_'+res+'_custom';
+
+            if($.inArray(anwserId, arrayCustom ) != -1)
+            {
+                $( '#'+custom_field_id ).css('display','block');
+            }else
+            {
+                $( '#'+custom_field_id ).css('display','none');
+            }
+        });
+
+        var validator3 = $("#kmc_subscription_informations").validate({
+            rules: {
+                 {% for i in 0..count %}
+                    {% if i %},{% endif %}
+                    'kmc_subscription_informations[informations][{{ i }}][answer]': "required",
+                    'kmc_subscription_informations[informations][{{ i }}][custom]': "required"
+                {% endfor %}
+            },
+            errorPlacement: function(error, element) {},
+            highlight: function (element, errorClass, validClass) {
+                $(element).removeClass("classic");
+                $(element).addClass("error");
+
+                var errors = validator3.numberOfInvalids();
+                if (errors) {
+                    var message = 'Vous n\'avez pas repondus à toute les questions !';
+                    $('#errorspan').html(message).show();
+                } else {
+                    $('#errorspan').hide();
+                }
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass("error");
+                $(element).addClass("classic");
+            },
+            // specifying a submitHandler prevents the default submit, good for the demo
+            submitHandler: function() {
+                form.submit();
+            }
+        });
+    });
+
+</script>
+{% endblock %}

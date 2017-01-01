@@ -1,0 +1,50 @@
+{% block form_widget_simple %}
+    {% spaceless %}
+        {% set type = type|default('text') %}
+        <input style="display:none" class="classic_info3" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% endspaceless %}
+{% endblock form_widget_simple %}
+
+{% block form_label %}
+    {% spaceless %}
+        {% if not compound %}
+            {% if label is not sameas(false) %}
+                {% if not compound %}
+                    {% set label_attr = label_attr|merge({'for': id}) %}
+                {% endif %}
+                {% if required %}
+                    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+                {% endif %}
+                {% if label is empty %}
+                    {% set label = name|humanize %}
+                {% endif %}
+                <label class="modeQ"{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+             {% endif %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_label %}
+
+{% block date_widget %}
+    {% spaceless %}
+        {% if widget == 'single_text' %}
+            {{ block('form_widget_simple') }}
+        {% else %}
+            <div {{ block('widget_container_attributes') }}>
+                {{ date_pattern|replace({
+                '{{ year }}':  form_widget(form.year, { 'attr': {'style': 'width:75px;'} }),
+                '{{ month }}': form_widget(form.month, { 'attr': {'style': 'width:50px;'} }),
+                '{{ day }}':   form_widget(form.day, { 'attr': {'style': 'width:50px;'} }),
+                })|raw }}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock date_widget %}
+{% block choice_widget_options %}
+    {% spaceless %}
+        {% for group_label, choice in options %}
+                <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>
+                    {{ choice.label|trans({}, translation_domain) }}
+                </option>
+        {% endfor %}
+    {% endspaceless %}
+{% endblock choice_widget_options %}

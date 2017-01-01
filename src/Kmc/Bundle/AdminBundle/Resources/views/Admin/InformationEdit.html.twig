@@ -1,0 +1,143 @@
+{% extends 'KmcAdminBundle::layout.html.twig' %}
+
+{% block menu %}
+    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{% endblock %}
+
+{% block title %}Edition d'une question{% endblock %}
+
+{% block breadcrum %}<a href="{{ path('kmc_admin_information_list') }}" >Gestion du questionnaire</a> <a href="#" class="current">Edition d'une question</a>{% endblock %}
+
+
+{% block content %}
+{% if err %}
+<div class="row-fluid">
+	<div class="span12">
+		<div class="alert alert-error">
+			<button class="close" data-dismiss="alert">×</button>
+			<strong>Mise à jour des saisons impossible</strong> Verifier les dates.
+		</div>
+	</div>
+</div>
+{%endif%}
+{% if modif %}
+<div class="row-fluid">
+	<div class="span12">
+		<div class="alert alert-success">
+			<button class="close" data-dismiss="alert">×</button>
+			La mise à jour a été effectuée avec succés.
+		</div>
+	</div>
+</div>
+{% endif %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                            <span class="icon">
+                                <i class="icon-align-justify"></i>
+                            </span>
+                <h5>Information sur la session en cours</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form name="kmc_admin_information" method="post" action="" class="form-horizontal ui-formwizard">
+                    <div class="control-group">
+                        <label class="control-label">{{ form_label(form.text) }}</label>
+                        <div class="controls">
+                            {{ form_widget(form.text) }}
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        <button type="button" class="btn btn-danger" onclick="window.location='{{ path('kmc_admin_information_list') }}';">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<form name="kmc_active_answer" method="post" action="" class="form-horizontal ui-formwizard">
+<div class="widget-box">
+	<input type="hidden" name="active_answer" value="active_answer">
+	<div class="widget-content nopadding">
+		<table class="table table-bordered table-striped table-hover with-check">
+			<thead>
+				<tr>
+					<th>Active</i></th>
+					<th>Réponses</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for answer in IQS.answers %}
+				<tr>
+					<td><input type="checkbox" value="{{answer.id}}" {%if answer.active == 1 %}checked="checked"{% endif%} name="answer_id[]"/></td>
+					<td>{{answer.text}}</td>
+					<td style="width:2%"><a href="#form_answer_edt_{{answer.id}}" data-toggle="modal" class="btn btn-primary">Editer</a></td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>					
+	</div>
+</div>
+{% if IQS.answers|length > 0 %}
+<button type="submit" class="btn btn-primary">Mettre à jours les réponses actives</button>
+{% endif %}
+<a href="#form_answer_new" data-toggle="modal" class="btn btn-primary">Ajouter une réponse</a>
+</form>
+{% for formAnswer in formAnswers %}
+<div id="form_answer_edt_{{formAnswer[0]}}" class="modal hide">
+	<div class="modal-header">
+		<button data-dismiss="modal" class="close" type="button">×</button>
+		<h3>Modifier le tarif</h3>
+	</div>
+	<div class="modal-body">
+		<div class="widget-content nopadding">
+	        <form name="form_answer_edt_{{formAnswer[0]}}" method="post" action="" class="form-horizontal ui-formwizard" novalidate="novalidate">
+	            <input type="hidden" name="answer_id" value="{{formAnswer[0]}}" />
+	            <div class="control-group">
+                	<label class="control-label">{{ form_label(formAnswer[1].text) }}</label>
+                    <div class="controls">
+                    	{{ form_widget(formAnswer[1].text) }}
+                    </div>
+                    <label class="control-label">{{ form_label(formAnswer[1].custom) }}</label>
+                    <div class="controls">
+                    	{{ form_widget(formAnswer[1].custom) }}
+                    </div>
+                 </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+	        </form>
+		</div>
+	</div>
+</div>
+{% endfor %}
+<div id="form_answer_new" class="modal hide">
+	<div class="modal-header">
+		<button data-dismiss="modal" class="close" type="button">×</button>
+		<h3>Modifier le tarif</h3>
+	</div>
+	<div class="modal-body">
+		<div class="widget-content nopadding">
+		{{	form_start(form_new_infomation)}}
+	        <form name="form_answer_new" method="post" action="" class="form-horizontal ui-formwizard" novalidate="novalidate">
+	            <input type="hidden" name="new_question" value="new_question" />
+	            <div class="control-group">
+                	<label class="control-label">{{ form_label(form_new_infomation.text) }}</label>
+                    <div class="controls">
+                    	{{ form_widget(form_new_infomation.text) }}
+                    </div>
+                    <label class="control-label">{{ form_label(form_new_infomation.custom) }}</label>
+                    <div class="controls">
+                    	{{ form_widget(form_new_infomation.custom) }}
+                    </div>
+                 </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+	        </form>
+		</div>
+	</div>
+</div>
+{% endblock %}

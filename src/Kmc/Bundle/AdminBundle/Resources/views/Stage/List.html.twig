@@ -1,0 +1,44 @@
+{% extends 'KmcAdminBundle::layout.html.twig' %}
+ 
+{% block menu %}
+    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{% endblock %}
+
+{% block title %}Liste des stage{% endblock %}
+
+{% block breadcrum %}<a href="#">Gestion des stages</a><a href="#" class="current">Liste des stages</a>{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span12">
+    	<div class="widget-box">
+            <div class="widget-title">
+
+                <h5>Liste des stages</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                    	<th>Nom</th>
+                        <th>date</th>
+                        <th>nb inscriptions</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for stage in stages %}
+                        <tr class="gradeX">
+                        	<td>{{stage.name}}</td>
+                            <td>{{ stage.dateStart|date('d/m/Y') }}</td>
+                            <td>{{stage.getCountSubscription()}}</td>
+                            <td style="width:2%;text-align:center"><button type="button" class="btn btn-primary" onclick="window.location='{{ path('kmc_admin_stage_edit', { 'stageId': stage.id }) }}';">Editer</button></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'KmcAdminBundle::layout.html.twig' %}
+
+{% block title %}Création d'un stage{% endblock %}
+
+{% block menu %}
+    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{% endblock %}
+{% block breadcrum %}<a href="#" class="current" >Création d'un stage</a>{% endblock %}
+{% block content %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                            <span class="icon">
+                                <i class="icon-align-justify"></i>
+                            </span>
+                <h5>Création d'un stage</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form name="kmc_admin_stage_edit" enctype="multipart/form-data" method="post" action="" class="form-horizontal ui-formwizard">                 
+                    <div class="control-group">
+                        <label class="control-label">{{ form_label(form.name) }}</label>
+                        <div class="controls">
+                            {{ form_widget(form.name) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">{{ form_label(form.description) }}</label>
+                        <div class="controls">
+                            {{ form_widget(form.description) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">{{ form_label(form.dateStart) }}</label>
+                        <div class="controls">
+                            {{ form_widget(form.dateStart) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">{{ form_label(form.timeStart) }}</label>
+                        <div class="controls">
+                            {{ form_widget(form.timeStart) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">{{ form_label(form.dateEnd) }}</label>
+                        <div class="controls">
+                            {{ form_widget(form.dateEnd) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">{{ form_label(form.timeEnd) }}</label>
+                        <div class="controls">
+                            {{ form_widget(form.timeEnd) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">{{ form_label(form.arrivalTime) }}</label>
+                        <div class="controls">
+                            {{ form_widget(form.arrivalTime) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">{{ form_label(form.place) }}</label>
+                        <div class="controls">
+                            {{ form_widget(form.place) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">{{ form_label(form.adress) }}</label>
+                        <div class="controls">
+                            {{ form_widget(form.adress) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">{{ form_label(form.price) }}</label>
+                        <div class="controls">
+                            {{ form_widget(form.price) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">{{ form_label(form.duration) }}</label>
+                        <div class="controls">
+                            {{ form_widget(form.duration) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+					<label class="control-label">Image</label>
+						<div class="controls">
+							<input type="file" name="image_club"/>
+						</div>
+					</div>		
+                    <div class="form-actions">
+                        
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

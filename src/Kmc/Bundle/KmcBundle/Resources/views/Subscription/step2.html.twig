@@ -1,0 +1,21 @@
+{% extends 'KmcKmcBundle::layout_subscription.html.twig' %}
+{% form_theme form 'KmcKmcBundle:Form:field.html.twig' %}
+{% block content %}
+<div id="stylized" class="myform">
+    <form id="kmc_subscription_payment" name="kmc_subscription_payment" method="post" action="">
+        <h1><span class="active" >Vos informations</span> <span class="active">></span> <span class="active" style="text-decoration:underline;">Mode de paiement</span> <span class="active">></span> <span class="inactive">Pour en savoir plus sur vous</span>  <span class="inactive">></span> <span class="inactive">Finalisation</span></h1>
+        <p>Indiquez quelle modalité de paiement souhaitez vous adopter pour payer votre cotisation</p>
+        <span id="errorspan" class="error2" style="display: none"></span>
+        <label class="mode1" for="kmc_member_lastname">Votre tarif<span class="small">Nous vous proposons un tarif adapté a votre activité</span></label>
+        {{ form_widget(form.price) }}
+        <label class="mode1" for="kmc_member_lastname">Mode de paiment<span class="small">Renseignez vos modalités de paiement</span></label>
+        {{ form_widget(form.payment) }}
+
+        <div style="margin-left:300px">
+            <button type="button" onclick="window.location.href='{{ path('kmc_subscription_step1') }}'" class="button2">Etape précédente</button>
+            {{ form_widget(form.next_step,{ 'attr': {'class': 'button2'} }) }}
+        </div>
+        {{ form_row(form._token) }}
+     </form>
+</div>
+{% endblock %}

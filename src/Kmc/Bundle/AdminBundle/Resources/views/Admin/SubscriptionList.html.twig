@@ -1,0 +1,85 @@
+{% extends 'KmcAdminBundle::layout.html.twig' %}
+
+{% block menu %}
+    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{% endblock %}
+
+{% block title %}Gestion des inscription{% endblock %}
+
+{% block breadcrum %}<a href="#" class="current" >Gestion des inscription</a>{% endblock %}
+
+
+{% block content %}
+<SCRIPT LANGUAGE="JavaScript"> 
+function export_data()
+{
+	var season = $("#season_choice").val();
+	document.location.href="subscriptioncsvlist/"+season;
+}
+</SCRIPT> 
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                <h5>Liste des inscrits</h5>
+            </div>
+            <div class="widget-content nopadding">
+				<form action="#" method="get" class="form-horizontal ui-formwizard">
+					<div class="control-group">
+						<label class="control-label">Saison : </label>
+						<div class="controls">
+							<select name="season" id="season_choice">
+                            	<option value="5" {%if season == 5%} default{%endif%}>2016/2017</option>
+                            	<option value="2"{%if season == 2%} default{%endif%}>2015/2016</option>
+                            	<option value="1" {%if season == 2%} default{%endif%}>2014/2015</option>
+                        	</select>
+						</div>
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">Filtrer</button>
+							<button type="button" class="btn btn-primary" onclick="export_data()">Export</button>
+						</div>
+					</div>
+				</form>
+			</div>
+        	<div class="widget-content nopadding">
+       			<table class="table table-bordered table-striped table-hover data-table">
+            		<thead>
+            			<tr>
+		                    <th>Civ.</th>
+		                    <th>Nom</th>
+		                    <th>Prenom</th>
+		                    <th>Mail</th>
+		                    <th>Club</th>
+		                    <th>Validation</th>
+            			</tr>
+            		</thead>
+            		<tbody>
+                		{% for subscription in subscriptions %}
+		                <tr class="gradeX">
+		                	<td>{% if subscription.civility == 0 %}Melle{% elseif subscription.civility == "1" %}Me{% else %}M{% endif %}</td>
+		                    <td>{{ subscription.lastname}}</td>
+		                    <td>{{ subscription.firstname }}</td>
+		                    <td>{{ subscription.email }}</td>
+		                    <td class="center">{{ subscription.club.name }}</td>
+							<td><button type="button" class="btn btn-primary" onclick="window.location='{{ path('kmc_admin_convert_subscription', { 'subscription_id': subscription.id }) }}';">Valider l'inscription</button></td>
+						</tr>
+		                {% endfor %}
+	                </tbody>
+            	</table>
+        	</div>
+        </div>
+    </div>
+</div>
+<a href="#modal_testF_834" data-toggle="modal" class="btn btn-primary validSubscription">Valider l'inscription</a>
+<div id="modal_testF_834" class="modal hide">
+	<div class="modal-header">
+		<button data-dismiss="modal" class="close" type="button">×</button>
+		<h3>Modifier le tarif</h3>
+	</div>
+	<div class="modal-body">
+		<div class="widget-content nopadding">
+			TEST
+		</div>
+	</div>
+</div>
+{% endblock %}
