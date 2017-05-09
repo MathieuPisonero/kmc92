@@ -1,12 +1,18 @@
-	{% extends 'KmcAdminBundle::layout.html.twig' %}
+
+{% extends 'KmcAdminBundle::layout.html.twig' %}
 
 {% block menu %}
-    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
 {% endblock %}
 
-{% block title %}Gestion des membres{% endblock %}
+{% block title %}
+Gestion des membres
+{% endblock %}
 
-{% block breadcrum %}<a href="{{ path('kmc_admin_member_list_card') }}" class="current">Gestion des membres</a>{% endblock %}
+{% block breadcrum %}
+<a href="{{ path('kmc_admin_member_list_card') }}" class="current">Gestion
+	des membres</a>
+{% endblock %}
 
 {% block content %}
 <SCRIPT LANGUAGE="JavaScript"> 
@@ -27,38 +33,52 @@ function export_data()
 		<div class="widget-box">
 			<div class="widget-content">
 				<form method="post">
-				<div class="control-group">
-                    <input type="hidden" name="filter" value="filer">
-                    <div class="controls" style="float: left;margin-right:15px">
-                    <label class="control-label">Saisons</label>
-                        <select id="filter_season" name="season" style="width:150px">
-                        	<option value="all" {% if filter.season == 'all' %}selected{% endif %}>Toutes</opion>
-                        	{% for season in seasons %}
-                        	<option value="{{season.id}}" {% if filter.season == season.id %}selected{% endif %}>{{season.name}}</option>
-                        	{% endfor%}
-                        </select>
-                    </div>
-                    
-                    <div class="controls" style="float: left;margin-right:15px" >
-                    <label class="control-label">Grade</label>	
-                        <select name="level" id="filter_level" style="width:150px">
-                        	<option value="all"  {% if filter.level == "all" %}selected{% endif %}>Tous</option>
-                        	<option value="none" {% if filter.level == "none" %}selected{% endif %}>Aucun</option>
-                        	<option value="jaune" {% if filter.level == "jaune" %}selected{% endif %}>Jaune</option>
-                        	<option value="orange" {% if filter.level == "orange" %}selected{% endif %}>Orange</option>
-                        	<option value="verte" {% if filter.level == "verte" %}selected{% endif %}>Verte</option>
-                        	<option value="bleu" {% if filter.level == "bleu" %}selected{% endif %}>Bleu</option>
-                        	<option value="marron" {% if filter.level == "marron" %}selected{% endif %}>Marron</option>
-                        	<option value="noire" {% if filter.level == "noire" %}selected{% endif %}>Noire</option>
-                        </select>
-                    </div>
-                    <div class="controls" >
-                    <label class="control-label">Membre mineur</label>	
-                        <input type="checkbox" name="minor" id="filter_minor" {% if filter.minor %}checked="checked"{% endif%}>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Appliquer les filtres</button>
-                <button type="button" class="btn btn-primary" onclick="export_data()">Export</button>
+					<div class="control-group">
+						<input type="hidden" name="filter" value="filer">
+						<div class="controls" style="float: left; margin-right: 15px">
+							<label class="control-label">Saisons</label> <select
+								id="filter_season" name="season" style="width: 150px">
+								<option value="all" {% if filter.season == 'all' %} selected
+									{% endif %}>Toutes
+									</opion>
+									{% for season in seasons %}
+								<option value="{{season.id}}"
+									{% if filter.season == season.id %} selected {% endif %}>{{season.name}}</option>
+								{% endfor%}
+							</select>
+						</div>
+
+						<div class="controls" style="float: left; margin-right: 15px">
+							<label class="control-label">Grade</label> <select name="level"
+								id="filter_level" style="width: 150px">
+								<option value="all" {% if filter.level == "all" %} selected
+									{% endif %}>Tous</option>
+								<option value="none" {% if filter.level == "none" %} selected
+									{% endif %}>Aucun</option>
+								<option value="jaune" {% if filter.level == "jaune" %} selected
+									{% endif %}>Jaune</option>
+								<option value="orange" {% if filter.level == "orange" %}
+									selected {% endif %}>Orange</option>
+								<option value="verte" {% if filter.level == "verte" %} selected
+									{% endif %}>Verte</option>
+								<option value="bleu" {% if filter.level == "bleu" %} selected
+									{% endif %}>Bleu</option>
+								<option value="marron" {% if filter.level == "marron" %}
+									selected {% endif %}>Marron</option>
+								<option value="noire" {% if filter.level == "noire" %} selected
+									{% endif %}>Noire</option>
+							</select>
+						</div>
+						<div class="controls">
+							<label class="control-label">Membre mineur</label> <input
+								type="checkbox" name="minor" id="filter_minor"
+								{% if filter.minor %} checked="checked" {% endif%}>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">Appliquer
+						les filtres</button>
+					<button type="button" class="btn btn-primary"
+						onclick="export_data()">Export</button>
 				</form>
 			</div>
 		</div>
@@ -68,13 +88,13 @@ function export_data()
 	<div class="span6">
 		<div class="widget-box">
 			<div class="widget-title">
-				<span class="icon">
-					<i class="icon-th-list"></i>
+				<span class="icon"> <i class="icon-th-list"></i>
 				</span>
 				<h5>Liste des membres</h5>
 			</div>
 			<div class="widget-content nopadding">
-				<table class="table table-bordered table-striped table-hover data-table">
+				<table
+					class="table table-bordered table-striped table-hover data-table">
 					<thead>
 						<tr>
 							<th>Nom</th>
@@ -83,30 +103,31 @@ function export_data()
 						</tr>
 					</thead>
 					<tbody>
-					{% for member in members %}
+						{% for member in members %}
 						<tr class="gradeX">
 							<td>{{member.lastname}}</td>
 							<td>{{member.firstname}}</td>
-							<td style="width:18%"><button type="button" class="btn btn-primary btn-mini" name="memberCard" data="{{member.id}}">Voir la fiche</button></td>
+							<td style="width: 18%"><button type="button"
+									class="btn btn-primary btn-mini" name="memberCard"
+									data="{{member.id}}">Voir la fiche</button></td>
 						</tr>
-					{% endfor %}
+						{% endfor %}
 					</tbody>
-				</table>  
+				</table>
 			</div>
 		</div>
 	</div>
 	<div class="span6">
 		<div class="widget-box">
 			<div class="widget-title">
-				<span class="icon">
-					<i class="icon-th-list"></i>
+				<span class="icon"> <i class="icon-th-list"></i>
 				</span>
 				<h5>Fiche d'un menbre</h5>
 			</div>
 			<div class="widget-content" id="content_member_card">
 				<p>Selectioner une fiche membre</p>
 			</div>
-			
+
 		</div>
 	</div>
 </div>

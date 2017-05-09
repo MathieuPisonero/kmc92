@@ -6,14 +6,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class PriceFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'text', array('label'=>'Nom'))
-        		->add('price', 'text', array('label'=>'Tarif'))
-                ->add("save", 'submit',array('label'=>"Enregistrer"));
+        $builder->add('name', TextType::class, array('label'=>'Nom'))
+        		->add('price', TextType::class, array('label'=>'Tarif'))
+                ->add("save", SubmitType::class,array('label'=>"Enregistrer"));
     }
 
     public function getName()
@@ -23,6 +25,6 @@ class PriceFormType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('csrf_protection' => false));
+        //$resolver->setDefaults(array('csrf_protection' => false));
     }
 }

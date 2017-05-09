@@ -1,63 +1,48 @@
 {% extends 'KmcAdminBundle::layout.html.twig' %}
- 
+
 {% block menu %}
-    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
 {% endblock %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}
+Accueil
+{% endblock %}
 
 {% block content %}
 <div class="row-fluid">
-	<div class="span12 center" style="text-align: center;">					
+	<div class="span12 center" style="text-align: center;">
 		<ul class="quick-actions">
-			<li>
-				<a href={{ path('kmc_admin_season') }} style="width:100px">
-					<i class="icon-calendar"></i>
-					Gestion des saisons
-				</a>
-			</li>
-			<li>
-				<a href="{{ path('kmc_admin_member_list_card') }}" style="width:100px">
-					<i class="icon-people"></i>
-					Gestion des membres
-				</a>
-			</li>
-			<li>
-				<a href="{{ path('kmc_admin_subscriptionlist') }}" style="width:100px">
-					<i class="icon-database"></i>
-					Gestion des inscriptions
-				</a>
-			</li>
-			<li>
-				<a href="{{ path('kmc_admin_stage') }}" style="width:100px">
-					<i class="icon-database"></i>
-					Gestion des stages (BETA)
-				</a>
-			</li>
+			<li><a href={{ path('kmc_admin_season') }} style="width: 100px">
+					<i class="icon-calendar"></i> Gestion des saisons
+			</a></li>
+			<li><a href="{{ path('kmc_admin_member_list_card') }}"
+				style="width: 100px"> <i class="icon-people"></i> Gestion des
+					membres
+			</a></li>
+			<li><a href="{{ path('kmc_admin_subscriptionlist') }}"
+				style="width: 100px"> <i class="icon-database"></i> Gestion des
+					inscriptions
+			</a></li>
+			<li><a href="{{ path('kmc_admin_stage') }}" style="width: 100px">
+					<i class="icon-database"></i> Gestion des stages (BETA)
+			</a></li>
 		</ul>
 	</div>
 </div>
 <div class="row-fluid">
-	<div class="span12 center" style="text-align: center;">					
+	<div class="span12 center" style="text-align: center;">
 		<ul class="quick-actions">
-			<li>
-				<a href="{{ path('kmc_admin_clublist') }}" style="width:100px">
-					<i class="icon-database"></i>
-					Gestion des clubs
-				</a>
-			</li>
-			<li>
-				<a href="{{ path('kmc_admin_price') }}" style="width:100px">
-					<i class="icon-shopping-bag"></i>
-					Gestion des tarifs
-				</a>
-			</li>
-			<li>
-				<a href="{{ path('kmc_admin_information_list') }}" style="width:100px">
-					<i class="icon-piechart"></i>
-					Gestion questionnaire
-				</a>
-			</li>
+			<li><a href="{{ path('kmc_admin_clublist') }}"
+				style="width: 100px"> <i class="icon-database"></i> Gestion des
+					clubs
+			</a></li>
+			<li><a href="{{ path('kmc_admin_price') }}" style="width: 100px">
+					<i class="icon-shopping-bag"></i> Gestion des tarifs
+			</a></li>
+			<li><a href="{{ path('kmc_admin_information_list') }}"
+				style="width: 100px"> <i class="icon-piechart"></i> Gestion
+					questionnaire
+			</a></li>
 		</ul>
 	</div>
 </div>

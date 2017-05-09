@@ -2,13 +2,19 @@
 {% form_theme form 'KmcAdminBundle:Form:season.html.twig' %}
 
 
-{% block title %}Convertir une inscription{% endblock %}
-
-{% block menu %}
-    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{% block title %}
+Convertir une inscription
 {% endblock %}
 
-{% block breadcrum %}<a href="{{ path('kmc_admin_subscriptionlist') }}" >Gestion des inscription</a> <a href="#" class="current">Convertir une inscription</a>{% endblock %}
+{% block menu %}
+{{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{% endblock %}
+
+{% block breadcrum %}
+<a href="{{ path('kmc_admin_subscriptionlist') }}">Gestion des
+	inscription</a>
+<a href="#" class="current">Convertir une inscription</a>
+{% endblock %}
 
 {% block content %}
 {% if is_member %}
@@ -16,211 +22,236 @@
 	<div class="span12">
 		<div class="alert alert-success">
 			<button class="close" data-dismiss="alert">×</button>
-			L'inscription correspond à un membre déja existant (l'adresse mail est identique).<br/>
-			Verifiez les informations d'inscription et mettre à jours la fiche du membre.
+			L'inscription correspond à un membre déja existant (l'adresse mail
+			est identique).<br /> Verifiez les informations d'inscription et
+			mettre à jours la fiche du membre.
 		</div>
 	</div>
 </div>
 {% endif %}
 <div class="row-fluid">
-    <div class="span12">
-        <div class="widget-box">
-            <div class="widget-title">
-                            <span class="icon">
-                                <i class="icon-align-justify"></i>
-                            </span>
-                <h5>Validation d'une inscription</h5>
-            </div>
-            <div class="widget-content nopadding">
-            <p>Cette personne n'a pas été trouvé dans la liste des membres du club</p>
-	       <form name="kmc_admin_season" enctype="multipart/form-data" method="post" action="" class="form-horizontal ui-formwizard">
-                <input type="hidden" name="createCard" value="createCard">
-                <div class="control-group">
-                    <label class="control-label">{{ form_label(form.civility) }}</label>
-                    <div class="controls">
-                        {{ form_widget(form.civility) }}
-                    </div>
-                </div>
-                {% if member_exist %}
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="alert alert-success">
-							Civilité de la fiche membre :{% if member_exist.civility == 0 %}Melle{% elseif member_exist.civility == "1" %}Me{% else %}M{% endif %}
+	<div class="span12">
+		<div class="widget-box">
+			<div class="widget-title">
+				<span class="icon"> <i class="icon-align-justify"></i>
+				</span>
+				<h5>Validation d'une inscription</h5>
+			</div>
+			<div class="widget-content nopadding">
+				<p>Cette personne n'a pas été trouvé dans la liste des
+					membres du club</p>
+				<form name="kmc_admin_season" enctype="multipart/form-data"
+					method="post" action="" class="form-horizontal ui-formwizard">
+					<input type="hidden" name="createCard" value="createCard">
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.civility) }}</label>
+						<div class="controls">
+							{{ form_widget(form.civility) }}
 						</div>
 					</div>
-				</div>
-				{% endif %}
-                <div class="control-group">
-                    <label class="control-label">{{ form_label(form.lastname) }}</label>
-                    <div class="controls">
-                        {{ form_widget(form.lastname) }}
-                    </div>
-                </div>
-                {% if member_exist %}
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="alert alert-success">
-							Nom de la fiche membre : {{member_exist.lastname}}
+					{% if member_exist %}
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="alert alert-success">
+								Civilité de la fiche membre :
+								{% if member_exist.civility == 0 %}
+								Melle
+								{% elseif member_exist.civility == "1" %}
+								Me
+								{% else %}
+								M
+								{% endif %}
+							</div>
 						</div>
 					</div>
-				</div>
-				{% endif %}
-                <div class="control-group">
-                    <label class="control-label">{{ form_label(form.firstname) }}</label>
-                    <div class="controls">
-                        {{ form_widget(form.firstname) }}
-                    </div>
-                </div>
-                {% if member_exist %}
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="alert alert-success">
-							Prénom de la fiche membre : {{member_exist.firstname}}
+					{% endif %}
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.lastname) }}</label>
+						<div class="controls">
+							{{ form_widget(form.lastname) }}
 						</div>
 					</div>
-				</div>
-				{% endif %}
-                <div class="control-group">
-                    <label class="control-label">{{ form_label(form.email) }}</label>
-                    <div class="controls">
-                        {{ form_widget(form.email) }}
-                    </div>
-                </div>
-                {% if member_exist %}
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="alert alert-success">
-							Email de la fiche membre : {{member_exist.email}}
+					{% if member_exist %}
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="alert alert-success">
+								Nom de la fiche membre :
+								{{member_exist.lastname}}
+							</div>
 						</div>
 					</div>
-				</div>
-				{% endif %}
-                <div class="control-group">
-                    <label class="control-label">{{ form_label(form.phone) }}</label>
-                    <div class="controls">
-                        {{ form_widget(form.phone) }}
-                    </div>
-                </div>
-                {% if member_exist %}
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="alert alert-success">
-							Téléphone de la fiche membre : {{member_exist.phone}}
+					{% endif %}
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.firstname) }}</label>
+						<div class="controls">
+							{{ form_widget(form.firstname) }}
 						</div>
 					</div>
-				</div>
-				{% endif %}
-                <div class="control-group">
-                    <label class="control-label">{{ form_label(form.job) }}</label>
-                    <div class="controls">
-                        {{ form_widget(form.job) }}
-                    </div>
-                </div>
-                {% if member_exist %}
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="alert alert-success">
-							Travail de la fiche membre : {{member_exist.job}}
+					{% if member_exist %}
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="alert alert-success">
+								Prénom de la fiche membre :
+								{{member_exist.firstname}}
+							</div>
 						</div>
 					</div>
-				</div>
-				{% endif %}
-                <div class="control-group">
-                    <label class="control-label">{{ form_label(form.birthdate) }}</label>
-                    <div class="controls">
-                        {{ form_widget(form.birthdate) }}
-                    </div>
-                </div>
-                {% if member_exist %}
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="alert alert-success">
-							Date de naissance de la fiche membre : {{member_exist.birthdate|date("m/d/Y")}}
+					{% endif %}
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.email) }}</label>
+						<div class="controls">
+							{{ form_widget(form.email) }}
 						</div>
 					</div>
-				</div>
-				{% endif %}
-                <div class="control-group">
-                    <label class="control-label">{{ form_label(form.adress) }}</label>
-                    <div class="controls">
-                        {{ form_widget(form.adress) }}
-                    </div>
-                </div>
-                {% if member_exist %}
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="alert alert-success">
-							Adresse de la fiche membre : {{member_exist.adress}}
+					{% if member_exist %}
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="alert alert-success">
+								Email de la fiche membre :
+								{{member_exist.email}}
+							</div>
 						</div>
 					</div>
-				</div>
-				{% endif %}
-                <div class="control-group">
-                    <label class="control-label">{{ form_label(form.zipcode) }}</label>
-                    <div class="controls">
-                        {{ form_widget(form.zipcode) }}
-                    </div>
-                </div>
-                {% if member_exist %}
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="alert alert-success">
-							Code postal de la fiche membre : {{member_exist.zipcode}}
+					{% endif %}
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.phone) }}</label>
+						<div class="controls">
+							{{ form_widget(form.phone) }}
 						</div>
 					</div>
-				</div>
-				{% endif %}
-                <div class="control-group">
-                    <label class="control-label">{{ form_label(form.city) }}</label>
-                    <div class="controls">
-                        {{ form_widget(form.city) }}
-                    </div>
-                </div>
-                {% if member_exist %}
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="alert alert-success">
-							Ville de la fiche membre : {{member_exist.city}}
+					{% if member_exist %}
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="alert alert-success">
+								Téléphone de la fiche membre :
+								{{member_exist.phone}}
+							</div>
 						</div>
 					</div>
-				</div>
-				{% endif %}
-                <div class="control-group">
-                    <label class="control-label">{{ form_label(form.practiceyear) }}</label>
-                    <div class="controls">
-                        {{ form_widget(form.practiceyear) }}
-                    </div>
-                </div>
-                {% if member_exist %}
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="alert alert-success">
-							Année de pratique de la fiche membre : {{member_exist.practiceyear}} an{%if member_exist.practiceyear > 1%}s{% endif %}
+					{% endif %}
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.job) }}</label>
+						<div class="controls">
+							{{ form_widget(form.job) }}
 						</div>
 					</div>
-				</div>
-				{% endif %}
-                <div class="control-group">
-                    <label class="control-label">{{ form_label(form.praticelevel) }}</label>
-                    <div class="controls">
-                        {{ form_widget(form.praticelevel) }}
-                    </div>
-                </div>
-                {% if member_exist %}
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="alert alert-success">
-							Niveau de pratique de la fiche membre : {{member_exist.praticelevel}}
+					{% if member_exist %}
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="alert alert-success">
+								Travail de la fiche membre :
+								{{member_exist.job}}
+							</div>
 						</div>
 					</div>
-				</div>
-				{% endif %}
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                </div>
-            </form>
-            </div>
-        </div>
-    </div>
+					{% endif %}
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.birthdate) }}</label>
+						<div class="controls">
+							{{ form_widget(form.birthdate) }}
+						</div>
+					</div>
+					{% if member_exist %}
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="alert alert-success">
+								Date de naissance de la fiche membre :
+								{{member_exist.birthdate|date("m/d/Y")}}
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.adress) }}</label>
+						<div class="controls">
+							{{ form_widget(form.adress) }}
+						</div>
+					</div>
+					{% if member_exist %}
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="alert alert-success">
+								Adresse de la fiche membre :
+								{{member_exist.adress}}
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.zipcode) }}</label>
+						<div class="controls">
+							{{ form_widget(form.zipcode) }}
+						</div>
+					</div>
+					{% if member_exist %}
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="alert alert-success">
+								Code postal de la fiche membre :
+								{{member_exist.zipcode}}
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.city) }}</label>
+						<div class="controls">
+							{{ form_widget(form.city) }}
+						</div>
+					</div>
+					{% if member_exist %}
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="alert alert-success">
+								Ville de la fiche membre :
+								{{member_exist.city}}
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.practiceyear) }}</label>
+						<div class="controls">
+							{{ form_widget(form.practiceyear) }}
+						</div>
+					</div>
+					{% if member_exist %}
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="alert alert-success">
+								Année de pratique de la fiche membre :
+								{{member_exist.practiceyear}}
+								an
+								{%if member_exist.practiceyear > 1%}
+								s
+								{% endif %}
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.praticelevel) }}</label>
+						<div class="controls">
+							{{ form_widget(form.praticelevel) }}
+						</div>
+					</div>
+					{% if member_exist %}
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="alert alert-success">
+								Niveau de pratique de la fiche membre :
+								{{member_exist.praticelevel}}
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					{{ form_row(form._token) }}
+					<div class="form-actions">
+						<button type="submit" class="btn btn-primary">Enregistrer</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
 {% endblock %}

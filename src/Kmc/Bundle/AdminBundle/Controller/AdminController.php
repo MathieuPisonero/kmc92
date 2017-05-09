@@ -49,26 +49,28 @@ class AdminController extends Controller
     public function SeasonEditAction($id, Request $request)
     {
     	$menu = array('Season','config');
+    	$val = false;
     	$err =false;
     	$repository_season= $this->getDoctrine()
     	->getRepository('KmcKmcBundle:Season');
     	$seasons = $repository_season->findById($id);
     	$season = $seasons[0];
-    	$form = $this->createForm(new SeasonFormType(), $season);
+    	$form = $this->createForm(SeasonFormType::class, $season);
     	$form->handleRequest($request);
     	if ($form->isValid()) {
+    		$val = true;
     		$em = $this->getDoctrine()->getManager();
     		$em->persist($season);
     		$em->flush();
     	}
-    	return $this->render('KmcAdminBundle:Admin:SeasonEdit.html.twig',array('form'=>$form->createView(),'err'=>$err,'menu'=>$menu));
+    	return $this->render('KmcAdminBundle:Admin:SeasonEdit.html.twig',array('form'=>$form->createView(),'val'=>$val, 'err'=>$err,'menu'=>$menu));
     }
     
     public function SeasonNewAction(Request $request)
     {
     	$menu = array('Season','config');
     	$season = new Season();
-    	$form = $this->createForm(new SeasonFormType(), $season);
+    	$form = $this->createForm(SeasonFormType::class, $season);
     	$form->handleRequest($request);
     	$err =false;
     	if ($form->isValid()) {
@@ -104,21 +106,28 @@ class AdminController extends Controller
     /**********************/
     /* Gestion des tarifs */
     /**********************/
-    public function PriceNewAction(Request $request)
+    public function PriceNewAction($id, Request $request)
     {
     	$menu = array('Season','price');
     	$price = new Price();
-    	$form = $this->createForm(new PriceFormType(), $price);
+    	$val = false;
+    	$type = 'new';
+    	if($id)
+    	{
+    		$repository_price= $this->getDoctrine()->getRepository('KmcKmcBundle:Price');
+    		$price = $repository_price->findOneById($id);
+    		$type='edit';
+    	}
+    	$form = $this->createForm(PriceFormType::class, $price);
     	$form->handleRequest($request);
     	if ($form->isValid()) {
+    		$val = true;
     		$price->setActive(0);
     		$em = $this->getDoctrine()->getManager();
     		$em->persist($price);
     		$em->flush();
-    		return $this->redirect($this->generateUrl('kmc_admin_price'));
-    		
     	}
-    	return $this->render('KmcAdminBundle:Admin:PriceNew.html.twig',array('menu'=>$menu,'form'=>$form->createView()));
+    	return $this->render('KmcAdminBundle:Admin:PriceNew.html.twig',array('menu'=>$menu,'form'=>$form->createView(),'val'=>$val,'type'=>$type));
     }
     
     
@@ -142,7 +151,7 @@ class AdminController extends Controller
     	$prices = $repository_price->findAll();
     	$forms=array();
     	foreach($prices as $price){
-    		$form = $this->createForm(new PriceFormType(), $price);
+    		$form = $this->createForm(PriceFormType::class, $price);
     		$forms[$price->getId()]=array($price->getId(),$form->createView(),$form);
     	}
     	
@@ -160,11 +169,11 @@ class AdminController extends Controller
 	    	}
     	}
     	foreach($prices as $price){
-    		$form = $this->createForm(new PriceFormType(), $price);
+    		$form = $this->createForm(PriceFormType::class, $price);
     		$forms[$price->getId()]=array($price->getId(),$form->createView(),$form);
     	}
     	
-    	return $this->render('KmcAdminBundle:Admin:Price.html.twig',array('prices'=>$prices,'menu'=>$menu,'forms'=>$forms,'modif'=>$modif));
+    	return $this->render('KmcAdminBundle:Admin:Price.html.twig',array('prices'=>$prices,'menu'=>$menu,'forms'=>$forms, 'modif'=>$modif));
     }
     
     /************************************/
@@ -225,7 +234,7 @@ class AdminController extends Controller
     		$is_member = true;
     	$createCard = $request->query->get('createCard');
     	if(empty($createCard))
-    	{
+    	{	
 	    	$member->setCivility($subscritpion->getCivility());
 	    	$member->setLastname($subscritpion->getLastname());
 	    	$member->setFirstname($subscritpion->getFirstname());
@@ -242,7 +251,7 @@ class AdminController extends Controller
 	    	$member->setPracticeyear($subscritpion->getPracticeyear());
 	    	$member->setPraticelevel($subscritpion->getPracticelevel());
     	}
-    	$form = $this->createForm(new MemberFormType(), $member);
+    	$form = $this->createForm(MemberFormType::class, $member);
     	$form->handleRequest($request);
     	if ($form->isValid()) {
     		$em = $this->getDoctrine()->getManager();
@@ -374,10 +383,10 @@ class AdminController extends Controller
     		
     	}
     	
-    	$form = $this->createForm(new MemberFormType(), $member);
+    	$form = $this->createForm(MemberFormType::class, $member);
     	$memberSeason = new MemberSeason();
     	$form_season = '';
-    	$form_season = $this->createForm(new MemberSeasonFormType(), $memberSeason);
+    	$form_season = $this->createForm(MemberSeasonFormType::class, $memberSeason);
     	
     	$form->handleRequest($request);
     	if ($form->isValid()) {
@@ -425,7 +434,7 @@ class AdminController extends Controller
     	$memberseason = new MemberSeason();
     	$member = new Member ();
     	$member->addSeason($memberseason);
-    	$form = $this->createForm(new NewMemberFormType(), $member);
+    	$form = $this->createForm(NewMemberFormType::class, $member);
     	$form->handleRequest($request);
     	if($form->isValid())
     	{
@@ -475,13 +484,15 @@ class AdminController extends Controller
     public function ClubEditAction(Request $request, $id)
     {
         $menu = array('club','');
+        $edit = false;
         $repository_club= $this->getDoctrine()
                                ->getRepository('KmcKmcBundle:Club');
         $club = $repository_club->find($id);
 
-        $form = $this->createForm(new ClubFormType(), $club);
+        $form = $this->createForm(ClubFormType::class, $club);
         $form->handleRequest($request);
         if ($form->isValid()) {
+        	$edit = true;
         	$image = $request->files->get('image_club');
         	if(!empty($image))
         	{
@@ -524,7 +535,7 @@ class AdminController extends Controller
 			$em->flush();
 			
 		}
-        return $this->render('KmcAdminBundle:Admin:ClubEdit.html.twig',array('menu'=>$menu,'club'=>$club,'form'=>$form->createView()));
+        return $this->render('KmcAdminBundle:Admin:ClubEdit.html.twig',array('menu'=>$menu,'club'=>$club,'edit'=>$edit, 'form'=>$form->createView()));
     }
     
     
@@ -598,7 +609,7 @@ class AdminController extends Controller
     {
     	$menu = array('information','edition');
     	$question = new InformationQuestion();
-    	$form = $this->createForm(new InformationFormType(), $question);
+    	$form = $this->createForm(InformationFormType::class, $question);
     	$form->handleRequest($request);
     	if ($form->isValid()) {
     		$question->setActive(0);
@@ -636,7 +647,7 @@ class AdminController extends Controller
     	}
     	
     	$newInformation = new InformationAnswer();
-    	$form_new_information = $this->createForm(new AnswerFormType(), $newInformation);
+    	$form_new_information = $this->createForm(AnswerFormType::class, $newInformation);
     	$form_new_information->handleRequest($request);
     	$new_question = $request->request->get('new_question');
     	if( !empty($new_question) )
@@ -656,7 +667,7 @@ class AdminController extends Controller
     	$answers = $IQS->getAnswers();
     	$formAnswers=array();
     	foreach($answers as $answer){
-    		$formAnswer = $this->createForm(new AnswerFormType(), $answer);
+    		$formAnswer = $this->createForm(AnswerFormType::class, $answer);
     		$formAnswers[$answer->getId()]=array($answer->getId(),$formAnswer->createView(),$formAnswer);
     	}
     	
@@ -675,7 +686,7 @@ class AdminController extends Controller
     		}
     	}
     	$IQS = $repository_IQ->find($id);
-    	$form = $this->createForm(new InformationFormType(), $IQS);
+    	$form = $this->createForm(InformationFormType::class, $IQS);
     	$form->handleRequest($request);
     	if ($form->isValid()) {
     		$em = $this->getDoctrine()->getManager();
@@ -683,11 +694,11 @@ class AdminController extends Controller
     		$em->flush();
     	}
     	foreach($answers as $answer){
-    		$formAnswer = $this->createForm(new AnswerFormType(), $answer);
+    		$formAnswer = $this->createForm(AnswerFormType::class, $answer);
     		$formAnswers[$answer->getId()]=array($answer->getId(),$formAnswer->createView(),$formAnswer);
     	}
 
-    	$form_new_information = $this->createForm(new AnswerFormType(), $newInformation);
+    	$form_new_information = $this->createForm(AnswerFormType::class, $newInformation);
     	
     	return $this->render('KmcAdminBundle:Admin:InformationEdit.html.twig',array('IQS'=>$IQS, 'menu'=>$menu, 'form'=>$form->createView(), 'formAnswers'=>$formAnswers, 'err'=>$err, 'modif'=>$modif, 'form_new_infomation'=>$form_new_information->createView()));
     }

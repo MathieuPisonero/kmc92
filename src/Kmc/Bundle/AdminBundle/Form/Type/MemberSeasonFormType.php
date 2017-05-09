@@ -5,21 +5,22 @@ namespace Kmc\Bundle\AdminBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\SecurityContext;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class MemberSeasonFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        	$builder->add(  'price', 'entity', array(
+        	$builder->add(  'price', EntityType::class, array(
 				            'required'=>false,
 				            'label' => "Mode de paiement",
 				            'class' => 'KmcKmcBundle:Price',
         					'required'  => true,
 				            'by_reference' => true
 				        ))
-				    ->add(  'season', 'entity', array(
+				        ->add(  'season', EntityType::class, array(
 				        		'required'=>false,
 				        		'label' => "Saison",
 				        		'class' => 'KmcKmcBundle:Season',
@@ -37,10 +38,12 @@ class MemberSeasonFormType extends AbstractType
     {
         return 'kmc_admin_memberseason';
     }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array('csrf_protection' => false,
-        						'data_class' => 'Kmc\Bundle\AdminBundle\Entity\MemberSeason'));
+    	$resolver->setDefaults(array(
+    			'data_class' => 'Kmc\Bundle\AdminBundle\Entity\MemberSeason',
+    			'csrf_protection' => false
+    	));
     }
 }

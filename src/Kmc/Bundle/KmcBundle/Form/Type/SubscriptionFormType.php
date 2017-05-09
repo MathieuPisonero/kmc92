@@ -21,7 +21,7 @@ class SubscriptionFormType extends AbstractType
             $years[]=$i;
         }
         $builder->add('civility', ChoiceType::class, array('required'=>true,
-                                                 'choices' => array('Mlle'=>"Mlle", 'Mme'=>"Mme", 'M.'=>"M"),
+                                                 'choices' => array('Mlle'=>0, 'Mme'=>1, 'M.'=>2),
                                                  'expanded'=>true,
                                                  'multiple'=>false))
         		->add('lastname', TextType::class, array('label'=>'Nom','required'=>false))

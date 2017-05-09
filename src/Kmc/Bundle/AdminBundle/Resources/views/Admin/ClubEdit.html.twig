@@ -1,80 +1,100 @@
 {% extends 'KmcAdminBundle::layout.html.twig' %}
 {% form_theme form 'KmcAdminBundle:Form:season.html.twig' %}
 
-{% block title %}Edition d'un club{% endblock %}
-
-{% block menu %}
-    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{% block title %}
+Edition d'un club
 {% endblock %}
 
-{% block breadcrum %}<a href="{{ path('kmc_admin_clublist') }}" >Gestion des clubs</a> <a href="#" class="current">Edition d'un club</a>{% endblock %}
+{% block menu %}
+{{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{% endblock %}
+
+{% block breadcrum %}
+<a href="{{ path('kmc_admin_clublist') }}">Gestion des clubs</a>
+<a href="#" class="current">Edition d'un club</a>
+{% endblock %}
+
 {% block content %}
+{% if edit %}
 <div class="row-fluid">
-    <div class="span12">
-        <div class="widget-box">
-            <div class="widget-title">
-                            <span class="icon">
-                                <i class="icon-align-justify"></i>
-                            </span>
-                <h5>Information sur la session en cours</h5>
-            </div>
-            <div class="widget-content nopadding">
-                <form name="kmc_admin_season" enctype="multipart/form-data" method="post" action="" class="form-horizontal ui-formwizard">
-                    <image src="/{{club.image}}"/>
-                    
-                    <div class="control-group">
-                        <label class="control-label">{{ form_label(form.name) }}</label>
-                        <div class="controls">
-                            {{ form_widget(form.name) }}
-                        </div>
-                    </div>
-                    <div class="control-group">
-					<label class="control-label">File upload input</label>
+	<div class="span12">
+		<div class="alert alert-success">
+			<button class="close" data-dismiss="alert">×</button>
+			La mise à jour a été effectuée avec succés.
+		</div>
+	</div>
+</div>
+{% endif %}
+<div class="row-fluid">
+	<div class="span12">
+		<div class="widget-box">
+			<div class="widget-title">
+				<span class="icon"> <i class="icon-align-justify"></i>
+				</span>
+				<h5>Information sur la session en cours</h5>
+			</div>
+			<div class="widget-content nopadding">
+				<form name="kmc_admin_season" enctype="multipart/form-data"
+					method="post" action="" class="form-horizontal ui-formwizard">
+					<image src="/{{club.image}}" />
+
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.name) }}</label>
 						<div class="controls">
-							<input type="file" name="image_club"/>
+							{{ form_widget(form.name) }}
 						</div>
-					</div>		
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Enregistrer</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">File upload input</label>
+						<div class="controls">
+							<input type="file" name="image_club" />
+						</div>
+					</div>
+					<div class="form-actions">
+						<button type="submit" class="btn btn-primary">Enregistrer</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
 <div class="widget-box">
 	<div class="widget-title">
-		<span class="icon">
-			<input type="checkbox" id="title-checkbox" name="title-checkbox" />
+		<span class="icon"> <input type="checkbox" id="title-checkbox"
+			name="title-checkbox" />
 		</span>
 		<h5>Static table with checkboxes</h5>
 	</div>
-	<form name="kmc_admin_city" method="post" action="" class="form-horizontal ui-formwizard">
-	<div class="widget-content nopadding">
-			<table class="table table-bordered table-striped table-hover with-check">
+	<form name="kmc_admin_city" method="post" action=""
+		class="form-horizontal ui-formwizard">
+		<div class="widget-content nopadding">
+			<table
+				class="table table-bordered table-striped table-hover with-check">
 				<thead>
 					<tr>
 						<th><i class="icon-resize-vertical"></i></th>
 						<th>Nom</th>
 						<th>Code postal</th>
-	
+
 					</tr>
 				</thead>
 				<tbody>
-				{% for city in club.citys  %}
+					{% for city in club.citys  %}
 					<tr>
-						<td><input type="checkbox" value="{{city.id}}" name="city_id[]"/></td>
+						<td><input type="checkbox" value="{{city.id}}"
+							name="city_id[]" /></td>
 						<td>{{city.name}}</td>
 						<td>{{city.zipcode}}</td>
 					</tr>
-				{% endfor %}
+					{% endfor %}
 				</tbody>
-			</table>					
-	</div>
+			</table>
+		</div>
 </div>
 <button type="submit" class="btn btn-primary">Supprimer ville</button>
-<a href="#myModal" data-toggle="modal" class="btn btn-primary">Ajouter une ville</a>
-</form>	
+<a href="#myModal" data-toggle="modal" class="btn btn-primary">Ajouter
+	une ville</a>
+</form>
 <div id="myModal" class="modal hide">
 	<div class="modal-header">
 		<button data-dismiss="modal" class="close" type="button">×</button>
@@ -82,24 +102,25 @@
 	</div>
 	<div class="modal-body">
 		<div class="widget-content nopadding">
-	        <form name="kmc_admin_season" method="post" action="" class="form-horizontal ui-formwizard" novalidate="novalidate">
-	            <input type="hidden" name="createCity" value="createCity" />
-	            <div class="control-group">
-	                <label class="control-label">Nom de la ville :</label>
-	                <div class="controls">
-	                	<input type="text" id="title-checkbox" name="city_name" />
-	            	</div>
-	            </div>
-	            <div class="control-group">
-	            	<label class="control-label">Code postal :</label>
-	            	<div class="controls">
-	            		<input type="text" id="title-checkbox" name="city_code" />
-	            	</div>
-	            </div>		
-	            <div class="form-actions">
-	                <button type="submit" class="btn btn-primary">Enregistrer</button>
-	            </div>
-	        </form>
+			<form name="kmc_admin_season" method="post" action=""
+				class="form-horizontal ui-formwizard" novalidate="novalidate">
+				<input type="hidden" name="createCity" value="createCity" />
+				<div class="control-group">
+					<label class="control-label">Nom de la ville :</label>
+					<div class="controls">
+						<input type="text" id="title-checkbox" name="city_name" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Code postal :</label>
+					<div class="controls">
+						<input type="text" id="title-checkbox" name="city_code" />
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">Enregistrer</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

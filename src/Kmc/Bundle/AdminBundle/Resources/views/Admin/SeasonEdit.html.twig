@@ -2,12 +2,18 @@
 {% form_theme form 'KmcAdminBundle:Form:season.html.twig' %}
 
 {% block menu %}
-    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
 {% endblock %}
 
-{% block title %}Edition d'une saisons{% endblock %}
+{% block title %}
+Edition d'une saisons
+{% endblock %}
 
-{% block breadcrum %}<a href="#" >Gestion des saisons</a><a href="{{ path('kmc_admin_season') }}" class="current">Edition d'une saisons</a>{% endblock %}
+{% block breadcrum %}
+<a href="#">Gestion des saisons</a>
+<a href="{{ path('kmc_admin_season') }}" class="current">Edition
+	d'une saisons</a>
+{% endblock %}
 
 {% block content %}
 {% if err %}
@@ -15,47 +21,59 @@
 	<div class="span12">
 		<div class="alert alert-error">
 			<button class="close" data-dismiss="alert">×</button>
-			<strong>Mise à jour des saisons impossible</strong> Verifier les dates.
+			<strong>Mise à jour des saisons impossible</strong> Verifier les
+			dates.
+		</div>
+	</div>
+</div>
+{%endif%}
+{% if val %}
+<div class="row-fluid">
+	<div class="alert alert-success">
+			<button class="close" data-dismiss="alert">×</button>
+			La mise à jour a été effectuée avec succés.
 		</div>
 	</div>
 </div>
 {%endif%}
 <div class="row-fluid">
-    <div class="span12">
-        <div class="widget-box">
-            <div class="widget-title">
-                            <span class="icon">
-                                <i class="icon-align-justify"></i>
-                            </span>
-                <h5>Information sur la session en cours</h5>
-            </div>
-            <div class="widget-content nopadding">
-                <form name="kmc_admin_season" method="post" action="" class="form-horizontal ui-formwizard">
-                    <div class="control-group">
-                        <label class="control-label">{{ form_label(form.name) }}</label>
-                        <div class="controls">
-                            {{ form_widget(form.name) }}
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">{{ form_label(form.seasonstart) }}</label>
-                        <div class="controls">
-                            {{ form_widget(form.seasonstart) }}
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">{{ form_label(form.seasonend) }}</label>
-                        <div class="controls">
-                            {{ form_widget(form.seasonend) }}
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Enregistrer</button>
-                        <button type="button" class="btn btn-danger" onclick="window.location='{{ path('kmc_admin_season') }}';">Annuler</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+	<div class="span12">
+		<div class="widget-box">
+			<div class="widget-title">
+				<span class="icon"> <i class="icon-align-justify"></i>
+				</span>
+				<h5>Information sur la session en cours</h5>
+			</div>
+			<div class="widget-content nopadding">
+				<form name="kmc_admin_season" method="post" action=""
+					class="form-horizontal ui-formwizard">
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.name) }}</label>
+						<div class="controls">
+							{{ form_widget(form.name) }}
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.seasonstart) }}</label>
+						<div class="controls">
+							{{ form_widget(form.seasonstart) }}
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">{{ form_label(form.seasonend) }}</label>
+						<div class="controls">
+							{{ form_widget(form.seasonend) }}
+						</div>
+					</div>
+					<div class="form-actions">
+						{{ form_row(form._token) }}
+						<button type="submit" class="btn btn-primary">Enregistrer</button>
+						<button type="button" class="btn btn-danger"
+						onclick="window.location='{{ path('kmc_admin_season') }}';">Annuler</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
 {% endblock %}

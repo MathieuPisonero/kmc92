@@ -1,48 +1,59 @@
 {% extends 'KmcAdminBundle::layout.html.twig' %}
 {% block menu %}
-    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
 {% endblock %}
 
-{% block title %}Gestion du questionnaire{% endblock %}
+{% block title %}
+Gestion du questionnaire
+{% endblock %}
 
-{% block breadcrum %}<a href="#" >Gestion du questionnaire</a>{% endblock %}
+{% block breadcrum %}
+<a href="#">Gestion du questionnaire</a>
+{% endblock %}
 
 
 {% block content %}
-<form name="kmc_active_question" method="post" action="" class="form-horizontal ui-formwizard">
-<input type="hidden" name="active_question" value="active_question">
- <div class="row-fluid">
-        <div class="span12">
-        
-            <div class="widget-box">
-                <div class="widget-title">
+<form name="kmc_active_question" method="post" action=""
+	class="form-horizontal ui-formwizard">
+	<input type="hidden" name="active_question" value="active_question">
+	<div class="row-fluid">
+		<div class="span12">
 
-                    <h5>Liste des Sasisons</h5>
-                </div>
-                <div class="widget-content nopadding">
-                    <table class="table table-bordered table-striped table-hover">
-                        <thead>
-                        <tr>
-                        	<th>Active</th>
-                            <th>Question</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for IQ in IQS %}
-                            <tr class="gradeX">
-                            	<td><input type="checkbox" value="{{IQ.id}}" {%if IQ.active == 1 %}checked="checked"{% endif%} name="question_id[]"/></td>
-                                <td>{{ IQ.text }}</td>
-                                <td style="width:2%;text-align:center"><button type="button" class="btn btn-primary" onclick="window.location='{{ path('kmc_admin_information_edit',{ 'id': IQ.id }) }}';">Editer</button></td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Mettre à jours les questions actives</button>
-    <button type="button" class="btn btn-primary" onclick="window.location='{{ path('kmc_admin_information_new') }}';">Créer</button>
- </form>
+			<div class="widget-box">
+				<div class="widget-title">
+
+					<h5>Liste des Sasisons</h5>
+				</div>
+				<div class="widget-content nopadding">
+					<table class="table table-bordered table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Active</th>
+								<th>Question</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for IQ in IQS %}
+							<tr class="gradeX">
+								<td><input type="checkbox" value="{{IQ.id}}"
+									{%if IQ.active == 1 %} checked="checked" {% endif%}
+									name="question_id[]" /></td>
+								<td>{{ IQ.text }}</td>
+								<td style="width: 2%; text-align: center"><button
+										type="button" class="btn btn-primary"
+										onclick="window.location='{{ path('kmc_admin_information_edit',{ 'id': IQ.id }) }}';">Editer</button></td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<button type="submit" class="btn btn-primary">Mettre à jours
+		les questions actives</button>
+	<button type="button" class="btn btn-primary"
+		onclick="window.location='{{ path('kmc_admin_information_new') }}';">Créer</button>
+</form>
 {% endblock %}

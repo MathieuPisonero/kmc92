@@ -1,2 +1,9 @@
 eclipse.preferences.version=1
+encoding//src/Kmc/Bundle/AdminBundle/Resources/views/Admin/ClubEdit.html.twig=UTF-8
+encoding//src/Kmc/Bundle/AdminBundle/Resources/views/Admin/ConvertToMenber.html.twig=UTF-8
+encoding//src/Kmc/Bundle/AdminBundle/Resources/views/Admin/InformationEdit.html.twig=UTF-8
+encoding//src/Kmc/Bundle/AdminBundle/Resources/views/Admin/Price.html.twig=UTF-8
+encoding//src/Kmc/Bundle/AdminBundle/Resources/views/Admin/PriceNew.html.twig=UTF-8
+encoding//src/Kmc/Bundle/AdminBundle/Resources/views/Admin/Season.html.twig=UTF-8
+encoding//src/Kmc/Bundle/AdminBundle/Resources/views/Admin/SeasonEdit.html.twig=UTF-8
 encoding/<project>=UTF-8

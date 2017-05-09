@@ -1,33 +1,59 @@
 {% extends 'KmcAdminBundle::layout.html.twig' %}
- 
+
 {% block menu %}
-    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
 {% endblock %}
 
-{% block title %}Création d'un tarif{% endblock %}
+{% block title %}
+	{% if type == "new"%}
+		Création d'un tarif
+	{% else%}
+		Modification d'un tarif
+	{% endif%}
+{% endblock %}
 
-{% block breadcrum %}<a href="#">Gestion des tarifs</a><a href="#" class="current">Création d'un tarif</a>{% endblock %}
+{% block breadcrum %}
+<a href="#">Gestion des tarifs</a>
+{% if type == "new"%}
+<a href="#" class="current">Création d'un tarif</a>
+{% else%}
+<a href="#" class="current">Modification d'un tarif</a>
+{% endif%}
+
+{% endblock %}
 
 {% block content %}
-<form name="kmc_admin_price" method="post" action="" class="form-horizontal ui-formwizard">
-<div class="widget-box">
-	<div class="widget-content nopadding">
-		<div class="control-group">
-			<label class="control-label">{{ form_label(form.name) }}</label>
-		    <div class="controls">
-		    	{{ form_widget(form.name) }}
-		    </div>
-		 </div>
-		 <div class="control-group">
-			<label class="control-label">{{ form_label(form.price) }}</label>
-		    <div class="controls">
-		    	{{ form_widget(form.price) }}
-		    </div>
-		 </div>
-		<div class="form-actions">
-		    <button type="submit" class="btn btn-primary">Enregistrer</button>
+{% if val %}
+<div class="row-fluid">
+	<div class="alert alert-success">
+			<button class="close" data-dismiss="alert">×</button>
+			La mise à jour a été effectuée avec succés.
 		</div>
 	</div>
 </div>
+{%endif%}
+<form name="kmc_admin_price" method="post" action=""
+	class="form-horizontal ui-formwizard">
+	<div class="widget-box">
+		<div class="widget-content nopadding">
+			<div class="control-group">
+				<label class="control-label">{{ form_label(form.name) }}</label>
+				<div class="controls">
+					{{ form_widget(form.name) }}
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">{{ form_label(form.price) }}</label>
+				<div class="controls">
+					{{ form_widget(form.price) }}
+				</div>
+			</div>
+			{{ form_row(form._token) }}
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">Enregistrer</button>
+				<button type="button" class="btn btn-danger" onclick="window.location='{{ path('kmc_admin_price') }}';">Annuler</button>
+			</div>
+		</div>
+	</div>
 </form>
 {% endblock %}

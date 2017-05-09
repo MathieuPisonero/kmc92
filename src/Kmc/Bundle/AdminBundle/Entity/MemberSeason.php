@@ -80,7 +80,6 @@ class MemberSeason
     public function setSeason(\Kmc\Bundle\KmcBundle\Entity\Season $season = null)
     {
     	$this->season = $season;
-    
     	return $this;
     }
     
@@ -103,7 +102,6 @@ class MemberSeason
     public function setPrice(\Kmc\Bundle\KmcBundle\Entity\Price $price = null)
     {
     	$this->price = $price;
-    
     	return $this;
     }
     

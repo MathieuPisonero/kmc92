@@ -1,38 +1,44 @@
 {% extends 'KmcAdminBundle::layout.html.twig' %}
 
-{% block title %}Gestion des clubs{% endblock %}
+{% block title %}
+Gestion des clubs
+{% endblock %}
 
 {% block menu %}
-    {{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
+{{ render(controller('KmcAdminBundle:Include:Menu', { 'menu': menu })) }}
 {% endblock %}
-{% block breadcrum %}<a href="#" class="current" >Gestion des clubs</a>{% endblock %}
+{% block breadcrum %}
+<a href="#" class="current">Gestion des clubs</a>
+{% endblock %}
 {% block content %}
-    <div class="row-fluid">
-        <div class="span12">
-            <div class="widget-box">
-                <div class="widget-title">
+<div class="row-fluid">
+	<div class="span12">
+		<div class="widget-box">
+			<div class="widget-title">
 
-                    <h5>Liste des club</h5>
-                </div>
-                <div class="widget-content nopadding">
-                    <table class="table table-bordered table-striped table-hover">
-                        <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for club in clubs %}
-                            <tr class="gradeX">
-                                <td style="width:90%">{{ club.name }}</td>
-                                <td style="text-align:center"><button type="button" class="btn btn-primary" onclick="window.location='{{ path('kmc_admin_clubedit', { 'id': club.id }) }}';">Editer</button></td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+				<h5>Liste des club</h5>
+			</div>
+			<div class="widget-content nopadding">
+				<table class="table table-bordered table-striped table-hover">
+					<thead>
+						<tr>
+							<th>Nom</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for club in clubs %}
+						<tr class="gradeX">
+							<td style="width: 90%">{{ club.name }}</td>
+							<td style="text-align: center"><button type="button"
+									class="btn btn-primary"
+									onclick="window.location='{{ path('kmc_admin_clubedit', { 'id': club.id }) }}';">Editer</button></td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}

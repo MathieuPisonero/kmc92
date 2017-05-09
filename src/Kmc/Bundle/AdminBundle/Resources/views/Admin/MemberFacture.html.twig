@@ -1,34 +1,60 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
-	<head>
-		<meta charset="UTF-8" >
-	</head>
-	<body style="text-align:center">
-		<image src="http://kmc.pisonero.eu/logos/KMC_logo_facture.jpg"/ style='top:0 px;left:15px;;position:absolute;width:200px;z-index:-1'>
-		<br/><br/>
-		<p style="margin-bottom:0px">KMC 92 / KMTC / KMB2 / KMCM</p>
-		<p style="margin-top:0px;margin-bottom:0px"><i>Associations Affiliées FEKM</i></p>
-		<p style="margin-top:0px;margin-bottom:0px">27, rue Gounod 92210 Saint-Cloud</p>
-		<p style="margin-top:0px;margin-bottom:30px">06 82 10 49 61 – contact@kmc92.fr</p>
-		<br/><br/><br/>
-		<h1 style="margin-top:30px">FACTURE ACQUITÉE</h1>
-		<p style="margin-top:75px;margin-bottom:0px">Je soussigné, Yann VEILLERANT,</p>
-		<p style="margin-top:4px;margin-bottom:0px">Directeur technique du KMC92  / KMTC / KMB2 / KMCM</p>
-		<p style="margin-top:15px;margin-bottom:0px">Certifie avoir reçu de :</p>
-		<table style="margin-left:auto;margin-right:auto;border-width:1px;border-style:solid;border-color:black;" CELLPADDING="5" CELLSPACING="0">
-			<tr>
-				<td style="text-align:center;border-width:1px;border-style:solid;border-color:black;" bgcolor="#ECCEF5">NOM</td>
-				<td style="text-align:center;border-width:1px;border-style:solid;border-color:black;" bgcolor="#ECCEF5">PRENOM</td>
-				<td style="width:25px;text-align:center;border-width:1px;border-style:solid;border-color:black;" bgcolor="#ECCEF5">MONTANT DE LA COTISATION</td>
-			</tr>
-			<tr>
-				<td style="text-align:center;border-width:1px;border-style:solid;border-color:black;">{{member.lastname}}</td>
-				<td style="text-align:center;border-width:1px;border-style:solid;border-color:black;">{{member.firstname}}</td>
-				<td style="text-align:center;border-width:1px;border-style:solid;border-color:black;">{{season.price.price}} €</td>
-			</tr>
+<head>
+<meta charset="UTF-8">
+</head>
+<body style="text-align: center">
+	<image src="http://kmc.pisonero.eu/logos/KMC_logo_facture.jpg"
+		/ style='top:0 px;left:15px;;position:absolute;width:200px;z-index:-1'>
+	<br />
+	<br />
+	<p style="margin-bottom: 0px">KMC 92 / KMTC / KMB2 / KMCM</p>
+	<p style="margin-top: 0px; margin-bottom: 0px">
+		<i>Associations Affiliées FEKM</i>
+	</p>
+	<p style="margin-top: 0px; margin-bottom: 0px">27, rue Gounod 92210
+		Saint-Cloud</p>
+	<p style="margin-top: 0px; margin-bottom: 30px">06 82 10 49 61 –
+		contact@kmc92.fr</p>
+	<br />
+	<br />
+	<br />
+	<h1 style="margin-top: 30px">FACTURE ACQUITÉE</h1>
+	<p style="margin-top: 75px; margin-bottom: 0px">Je soussigné, Yann
+		VEILLERANT,</p>
+	<p style="margin-top: 4px; margin-bottom: 0px">Directeur technique
+		du KMC92 / KMTC / KMB2 / KMCM</p>
+	<p style="margin-top: 15px; margin-bottom: 0px">Certifie avoir reçu
+		de :</p>
+	<table
+		style="margin-left: auto; margin-right: auto; border-width: 1px; border-style: solid; border-color: black;"
+		CELLPADDING="5" CELLSPACING="0">
+		<tr>
+			<td
+				style="text-align: center; border-width: 1px; border-style: solid; border-color: black;"
+				bgcolor="#ECCEF5">NOM</td>
+			<td
+				style="text-align: center; border-width: 1px; border-style: solid; border-color: black;"
+				bgcolor="#ECCEF5">PRENOM</td>
+			<td
+				style="width: 25px; text-align: center; border-width: 1px; border-style: solid; border-color: black;"
+				bgcolor="#ECCEF5">MONTANT DE LA COTISATION</td>
+		</tr>
+		<tr>
+			<td
+				style="text-align: center; border-width: 1px; border-style: solid; border-color: black;">{{member.lastname}}</td>
+			<td
+				style="text-align: center; border-width: 1px; border-style: solid; border-color: black;">{{member.firstname}}</td>
+			<td
+				style="text-align: center; border-width: 1px; border-style: solid; border-color: black;">{{season.price.price}}
+				€</td>
+		</tr>
 		<table>
-		                      
-		<p>En règlement de son inscription au club de Krav Maga,</p>
-		<p>Pour la {{season.season.name|lower}}</p>
-		<p>Pour faire valoir ce que de droit.</p>
-	</body>
+
+			<p>En règlement de son inscription au club de Krav Maga,</p>
+			<p>
+				Pour la
+				{{season.season.name|lower}}
+			</p>
+			<p>Pour faire valoir ce que de droit.</p>
+</body>
 </html>

@@ -14,8 +14,8 @@ kmc_admin_price:
     path:  /admin/price
     defaults: { _controller: KmcAdminBundle:Admin:Price }
 kmc_admin_pricenew:
-    path:  /admin/pricenew
-    defaults: { _controller: KmcAdminBundle:Admin:PriceNew }
+    path:  /admin/pricenew/{id}
+    defaults: { _controller: KmcAdminBundle:Admin:PriceNew,  id: false }
 kmc_admin_subscriptionlist:
     path:  /admin/subscriptionlist
     defaults: { _controller: KmcAdminBundle:Admin:SubscriptionList}
