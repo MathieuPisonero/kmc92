@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Subscription
  *
- * @ORM\Table()
+ * @ORM\Table(name="subscription")
  * @ORM\Entity
  */
 class Subscription

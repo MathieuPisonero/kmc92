@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Club
  *
- * @ORM\Table()
+ * @ORM\Table(name="club")
  * @ORM\Entity
  */
 class Club
