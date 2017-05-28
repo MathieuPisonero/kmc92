@@ -50,8 +50,7 @@
             Expression2 = new RegExp("[0-9]","g");
             Index = Expression.exec($(this).attr('name'));
             res = Expression2.exec(Index);
-            custom_field_id = 'kmc_subscription_informations_informations_'+res+'_custom';
-
+            custom_field_id = 'subscription_informations_form_informations_'+res+'_custom';
             if($.inArray(anwserId, arrayCustom ) != -1)
             {
                 $( '#'+custom_field_id ).css('display','block');

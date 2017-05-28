@@ -39,14 +39,9 @@ class PaymentFormType extends AbstractType
 
     }
 
-    public function getName()
-    {
-        return 'kmc_subscription_payment';
-    }
-
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults(array('name' => "payment_form_payment",
             'data_class' => 'Kmc\Bundle\KmcBundle\Entity\Subscription',
         ));
     }

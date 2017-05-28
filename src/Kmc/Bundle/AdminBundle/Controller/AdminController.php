@@ -72,6 +72,7 @@ class AdminController extends Controller
     	$season = new Season();
     	$form = $this->createForm(SeasonFormType::class, $season);
     	$form->handleRequest($request);
+    	$val=false;
     	$err =false;
     	if ($form->isValid()) {
     		$date = $season->getSeasonstart()->format('Y/m/d h:m:s');
@@ -98,7 +99,7 @@ class AdminController extends Controller
     			return $this->redirect($this->generateUrl('kmc_admin_season'));
     		}
     	}
-    	return $this->render('KmcAdminBundle:Admin:SeasonEdit.html.twig',array('form'=>$form->createView(),'err'=>$err, 'menu'=>$menu));
+    	return $this->render('KmcAdminBundle:Admin:SeasonEdit.html.twig',array('form'=>$form->createView(),'err'=>$err,'val'=>$val, 'menu'=>$menu));
     }
 
     

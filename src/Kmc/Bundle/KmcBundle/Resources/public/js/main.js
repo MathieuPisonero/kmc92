@@ -2,9 +2,9 @@ $(document).ready(function(){
 
     function checkAge()
     {
-        var year  = $('#kmc_subscritpion_birthdate_year').val();
-        var month = $('#kmc_subscritpion_birthdate_month').val();
-        var day   = $('#kmc_subscritpion_birthdate_day').val();
+        var year  = $('#subscription_form_birthdate_year').val();
+        var month = $('#subscription_form_birthdate_month').val();
+        var day   = $('#subscription_form_birthdate_day').val();
         birthday = new Date(year, month, day);
         var age = new Number((new Date().getTime() - birthday.getTime()) / 31536000000).toFixed(1);
         if ( age < 18 && age >= 15 )
@@ -27,7 +27,7 @@ $(document).ready(function(){
 
     checkAge();
 
-    $('#kmc_subscritpion_birthdate_year').change(function(){
+    $('#subscription_form_birthdate_year').change(function(){
         checkAge();
     });
     

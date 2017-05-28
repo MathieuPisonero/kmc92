@@ -86,7 +86,8 @@ $(document).ready(function(){
 
     var validator2 = $("#kmc_subscription_payment").validate({
         rules: {
-            'kmc_subscription_payment[payment]': "required"
+        	'payment_form[price]':"required",
+            'payment_form[payment]': "required"
         },
         errorPlacement: function(error, element) {},
         highlight: function (element, errorClass, validClass) {
@@ -95,8 +96,10 @@ $(document).ready(function(){
 
             var errors = validator2.numberOfInvalids();
             if (errors) {
-                var message = 'veuillez saisir un mode de paiement';
-                $('#errorspan').html(message).show();
+            	var message = errors == 1
+                ? 'Vous avez oublié 1 champ. Il est indiqué ci-dessous'
+                : errors + ' champs ne sont pas correctement renseignés. Veuillez les vérifier ci-dessous';
+            	$('#errorspan').html(message).show();
             } else {
                 $('#errorspan').hide();
             }
