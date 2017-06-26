@@ -5,8 +5,13 @@ namespace Kmc\Bundle\KmcBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\SecurityContext;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class StageSubscriptionFormType extends AbstractType
 {
@@ -17,23 +22,22 @@ class StageSubscriptionFormType extends AbstractType
     	{
     	$years[]=$i;
     	}
-    		$builder->add('civility', 'choice', array('required'=>false,
-    				'choices' => array('0'=>'Mlle', '1'=>'Mme','2'=>'M.'),
+    		$builder->add('civility', ChoiceType::class, array('required'=>true,
+    				'choices' => array('Mlle'=>'0', 'Mme'=>'1','M.'=>'2'),
     				'expanded'=>true,
-    				'multiple'=>false,
-    				'empty_value'  => false))
-    						->add('lastname', 'text', array('label'=>'Nom','required'=>false))
-    						->add('firstname', 'text', array('label'=>'Prénom','required'=>false))
-    						->add('email', 'text', array('label'=>'e-mail','required'=>false))
-    						->add('phone', 'text', array('label'=>'N° de téléphone','required'=>false))
-    						->add('birthdate', 'date',array(    'label'  =>'Date de naissance',
+    				'multiple'=>false))
+    						->add('lastname', TextType::class, array('label'=>'Nom','required'=>false))
+    						->add('firstname', TextType::class, array('label'=>'Prénom','required'=>false))
+    						->add('email', TextType::class, array('label'=>'e-mail','required'=>false))
+    						->add('phone', TextType::class, array('label'=>'N° de téléphone','required'=>false))
+    						->add('birthdate', DateType::class,array(    'label'  =>'Date de naissance',
     								'widget' => 'choice',
     								'required'=>false,
-    								'format' => "dd <span>/</span> MM <span>/</span> yyyy",
+    								'format' => "dd MM yyyy",
     								'years'=>$years))
-    						->add('responsablelastname', 'text', array('label'=>'Nom du tuteur légal','required'=>false))
-    						->add('responsablefirstname', 'text', array('label'=>'Prenom du tuteur légal','required'=>false))
-                			->add("next_step", 'submit',array('label'=>"Etape suivante"));
+    								->add('responsablelastname', TextType::class, array('label'=>'Nom du tuteur légal','required'=>false))
+    								->add('responsablefirstname', TextType::class, array('label'=>'Prenom du tuteur légal','required'=>false))
+    								->add("next_step", SubmitType::class,array('label'=>"Etape suivante"));
     }
 
     public function getName()
@@ -43,8 +47,8 @@ class StageSubscriptionFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'csrf_protection' => false,
-        ));
+    	$resolver->setDefaults(array(
+    			'csrf_protection' => false
+    	));
     }
 }

@@ -3,7 +3,7 @@
 {% block content %}
 
 <div id="stylized" class="myform">
-    <form id="subscription_form" name="subscription_form" method="post" action="">
+    <form id="subscription_form" name="subscription_form" method="post" action="" enctype="multipart/form-data">
         {{ form_errors(form) }}
         <h1><span class="active" style="text-decoration:underline;">Vos informations</span> <span class="active">></span> <span class="inactive">Mode de paiement</span> <span class="inactive">></span> <span class="inactive">Pour en savoir plus sur vous</span>  <span class="inactive">></span> <span class="inactive">Finalisation</span></h1>
         <p>Renseignez toutes les informations nécessaires à votre inscription</p>
@@ -41,6 +41,13 @@
         {{ form_widget(form.zipcode) }}
         <label class="mode1" for="City">Ville<span class="small">Entrez votre Ville</span></label>
         {{ form_widget(form.city) }}
+        <label class="mode1" for="practiceyear">Certificat médical<span class="small">Fournir une copie du certificat médical</span></label>
+        {{ form_widget(form.certificat) }}
+        {% if certificat_img%}
+        <div style="float:left;width:100%;text-align:center">
+        <img src="{{ path('kmc_get_tmp_certificat')}}" width="50px" style="margin-lef:auto;margin-rigth:auto">
+        </div>
+        {% endif %}
         <label class="mode1" for="practiceyear">Années de pratique<span class="small">Entrez le nombre d'années de pratique de la Kravmaga</span></label>
         {{ form_widget(form.practiceyear) }}
         <label class="mode1" for="practicelevel">Grade actuel<span class="small">Selectionnez la couleur de votre ceinture</span></label>

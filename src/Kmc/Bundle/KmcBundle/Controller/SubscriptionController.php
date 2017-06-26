@@ -17,13 +17,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Filesystem\Filesystem;
-
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class SubscriptionController extends Controller
 {
     public function step1Action(Request $request)
     {
+    	$helper = $this->get("kmc_kmc.imageloader");
     	$em = $this->getDoctrine()->getManager();
     	$date = date('Y/m/d 00:00:00');
     	$query = $em->createQuery("SELECT u.name FROM KmcKmcBundle:Season u WHERE u.seasonstart < '" . $date . "' AND u.seasonend > '" . $date ."'");
@@ -35,11 +35,13 @@ class SubscriptionController extends Controller
     	}
         //recuperationd de la session
         $session = $request->getSession();
+        
         //$session->remove('subscription');
         //$session->remove('new_menber_step');
         //$session->remove('price');
 		
         $subscription = new Subscription();
+        
         $step = $session->get('new_menber_step');
         //Recuperation des info en session si l'etape 1 à déja était enregistrée.
         if( $step == 1)
@@ -47,22 +49,27 @@ class SubscriptionController extends Controller
             $subscription = $session->get('subscription');
             
         }
-        
+        $certificat = $request->getSession()->get('subscription')->getCertificat();
         $form = $this->createForm(SubscriptionFormType::class, $subscription);
         $form->handleRequest($request);
-        
         if ($form->isValid()) {
+        	
+        	if(empty($subscription->getCertificat()) && !empty($certificat))
+        		$subscription->setCertificat($certificat);
+        	else
+        		$subscription = $helper->setFileName($subscription,$request);
             $em->detach($subscription);
             $session->set('subscription',$subscription);
             $session->set('new_menber_step',1);
             return $this->redirect($this->generateUrl('kmc_subscription_step2'));
         }
-        return $this->render('KmcKmcBundle:Subscription:step1.html.twig',array('form'=>$form->createView()));
+        return $this->render('KmcKmcBundle:Subscription:step1.html.twig',array('form'=>$form->createView(),'certificat_img'=>$helper->isTmpCertificat($subscription)));
     }
 
     public function step2Action(Request $request)
     {
         $session = $request->getSession();
+        
         $price=$session->get('price');
         if( $session->get('new_menber_step') != 1 )
             return $this->redirect($this->generateUrl('kmc_subscription_step1'));
@@ -82,7 +89,7 @@ class SubscriptionController extends Controller
             $price = $repository_Price->find($subscription->getPrice()->getId());
             $subscription->setPrice($price);
         }
-
+        //var_dump($subscription->getCertificat());die();
         $form = $this->createForm(PaymentFormType::class, $subscription);
         if( date("n") > 3 && date("n") <06)
         {
@@ -93,6 +100,7 @@ class SubscriptionController extends Controller
             $price=$session->get('price');
             $price=array($price['complete'],'complete');
         }
+        
         $form->handleRequest($request);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -248,10 +256,6 @@ class SubscriptionController extends Controller
               $tabPrice[] = array('total'=>$price_val,'num'=>1,'val'=>$price_val);
           }
 
-
-
-
-
           //determine si l'inscrit est majeur ou mineur
           $birthdate = date("d/m/Y",strtotime($subscription->getBirthdate()->date));
           $time = strtotime($subscription->getBirthdate()->date);
@@ -281,10 +285,13 @@ class SubscriptionController extends Controller
 	          $repository_season = $this->getDoctrine()
 	          							  ->getRepository('KmcKmcBundle:Season');
 	          $season = $repository_season->find(5);
+	          $subscription->setCreated (new \DateTime('now',new \DateTimeZone('EUROPE/Paris')));
 	          $subscription->setSeason($season);
 	          $subscription->setIsconvert(0);
               //Fixe le club
               $subscription->setClub($club);
+              $helper = $this->get("kmc_kmc.imageloader");
+              $subscription = $helper->saveCertificat($subscription);
               $em->persist($subscription);
               $em->flush();
               

@@ -56,6 +56,7 @@ function export_data()
 							<th>Prenom</th>
 							<th>Mail</th>
 							<th>Club</th>
+							<th>Date</th>
 							<th>Validation</th>
 						</tr>
 					</thead>
@@ -67,6 +68,7 @@ function export_data()
 							<td>{{ subscription.firstname }}</td>
 							<td>{{ subscription.email }}</td>
 							<td class="center">{{ subscription.club.name }}</td>
+							<td class="center">{{ subscription.created|date('d-m-Y H:i:s') }}</td>
 							<td><button type="button" class="btn btn-primary"
 									onclick="window.location='{{ path('kmc_admin_convert_subscription', { 'subscription_id': subscription.id }) }}';">Valider
 									l'inscription</button></td>

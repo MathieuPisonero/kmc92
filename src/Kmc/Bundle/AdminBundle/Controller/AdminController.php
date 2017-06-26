@@ -282,6 +282,10 @@ class AdminController extends Controller
     		$MemberSeason->setMember($member);
     		$MemberSeason->setSeason($subscritpion->getSeason());
     		$MemberSeason->setPrice($subscritpion->getPrice());
+    		
+    		//Recupération du certificat
+    		$helper = $this->get("kmc_kmc.imageloader");
+    		$MemberSeason->setCertificat($helper->CopyMemberCertificat($subscritpion));
     		$em->persist($MemberSeason);
     		$member->addSeason($MemberSeason);
 
@@ -294,7 +298,7 @@ class AdminController extends Controller
     		return $this->redirect($this->generateUrl('kmc_admin_subscriptionlist',array('convert' => true)));
     	}
     	
-    	$response = $this->render('KmcAdminBundle:Admin:ConvertToMenber.html.twig',array('menu'=>$menu,'member_exist'=>$member_exist,'is_member'=>$is_member, 'form'=>$form->createView()));
+    	$response = $this->render('KmcAdminBundle:Admin:ConvertToMenber.html.twig',array('menu'=>$menu,'subscription_id'=>$subscription_id,'member_exist'=>$member_exist,'is_member'=>$is_member, 'form'=>$form->createView()));
     	return $response;
     }
     
@@ -425,6 +429,27 @@ class AdminController extends Controller
 	    		$validation = "La saison a été ajoutée";
     		}
     	}
+    	if($request->request->get("updateCertificat")=="updateCertificat")
+    	{
+    		$member_id = $request->request->get("member_id");
+    		$memberseson_id = $request->request->get("memberseason_id");
+    		
+    		$repository_season= $this->getDoctrine()->getRepository('KmcAdminBundle:MemberSeason');
+    		$memberseason = $repository_season->find($memberseson_id);
+    		
+    		$helper = $this->get("kmc_kmc.imageloader");
+    		if($request->request->get("delete"))
+    		{
+    			$memberseason = $helper->DeleteMemberCertificat($memberseason);
+    			
+    		}else{
+    			$file = $request->files->get("certificat");
+    			$memberseason = $helper->uploadNewCertificatMemberSeason($file,$memberseason);
+    		}
+    		$em = $this->getDoctrine()->getManager();
+    		$em->persist($memberseason);
+    		$em->flush();
+    	}
     	$response =  $this->render('KmcAdminBundle:Admin:MemberEditCard.html.twig',array('menu'=>$menu,'seasons'=>$member->getSeasons(),'form'=>$form->createView(),'form_season'=>$form_season->createView(),'validation'=>$validation));
     	return $response;
     }
@@ -468,6 +493,12 @@ class AdminController extends Controller
 																				  ));	
     }
     
+    public function getJsonMenberSeasonAction($member_season_id){
+    	$memberseason = $this->getDoctrine()
+    						 ->getRepository('KmcAdminBundle:MemberSeason')
+    						 ->find($member_season_id);
+    						 return new JsonResponse(array("id"=>$memberseason->getId(),"memberid"=>$memberseason->getMember()->getId(),"season_name"=>$memberseason->getSeason()->getName(),'certificat'=>$memberseason->getCertificat()));
+    }
     
     /*********************/
     /* Gestion des clubs */

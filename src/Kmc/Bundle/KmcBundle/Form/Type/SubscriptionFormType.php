@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class SubscriptionFormType extends AbstractType
@@ -53,6 +54,7 @@ class SubscriptionFormType extends AbstractType
                                                  'choices' => array('Nouvelle licence FEKM'=>'new', 'Renouvellement de licence FEKM'=>'reload'),
                                                  'expanded'=>true,
                                                  'multiple'=>false))
+                ->add('certificat', FileType::class, array('required'=>false,'label' => 'Image (JPEG file)','data_class' => null))
                 ->add("next_step", SubmitType::class,array('label'=>"Etape suivante"));
     }
 

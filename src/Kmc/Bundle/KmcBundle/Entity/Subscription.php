@@ -4,13 +4,15 @@ namespace Kmc\Bundle\KmcBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Subscription
  *
  * @ORM\Table(name="subscription")
  * @ORM\Entity
  */
-class Subscription
+class Subscription implements \Serializable
 {
     /**
      * @var integer
@@ -163,10 +165,11 @@ class Subscription
      */
     protected $season;
     
-
-    public function __construct() {
-        $this->informations = new ArrayCollection();
-    }
+    /**
+     * @var string
+     * @ORM\Column(name="created", type="datetime")
+     */
+    private $created;
 
     /**
      * @var string
@@ -174,6 +177,16 @@ class Subscription
      * @ORM\Column(name="licence", type="string")
      */
     private $licence;
+    
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\File(mimeTypes={ "image/jpeg" })
+     */
+    private $certificat;
+    
+    public function __construct() {
+        $this->informations = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -708,5 +721,99 @@ class Subscription
     public function getSeason()
     {
     	return $this->season;
+    }
+    
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Subcription
+     */
+    public function setCreated(\DateTime $created= null)
+    {
+    	$this->created = $created;
+    	return $this;
+    }
+    
+    /**
+     * Get created
+     * @return Subcription
+     */
+    public function getCreated()
+    {
+    	return $this->created;
+    }
+    
+    public function getCertificat()
+    {
+    	return $this->certificat;
+    }
+    
+    public function setCertificat($certificat)
+    {
+    	$this->certificat= $certificat;
+    	
+    	return $this;
+    }
+    
+    public function serialize()
+    {
+    	return serialize(array(
+    			$this->civility,
+    			$this->lastname,
+    			$this->firstname,
+    			$this->email,
+    			$this->phone,
+    			$this->job,
+    			$this->birthdate,
+    			$this->adress,
+    			$this->zipcode,
+    			$this->city,
+    			$this->major,
+    			$this->isconvert,
+    			$this->responsablefirstname,
+    			$this->responsablelastname,
+    			$this->practiceyear,
+    			$this->practicelevel,
+    			$this->club,
+    			$this->informations,
+    			$this->payment,
+    			$this->price,
+    			$this->season,
+    			$this->created,
+    			$this->licence,
+    			$this->certificat
+    			
+    	));
+    }
+    
+    public function unserialize($serialized)
+    {
+    	list (
+    			$this->civility,
+    			$this->lastname,
+    			$this->firstname,
+    			$this->email,
+    			$this->phone,
+    			$this->job,
+    			$this->birthdate,
+    			$this->adress,
+    			$this->zipcode,
+    			$this->city,
+    			$this->major,
+    			$this->isconvert,
+    			$this->responsablefirstname,
+    			$this->responsablelastname,
+    			$this->practiceyear,
+    			$this->practicelevel,
+    			$this->club,
+    			$this->informations,
+    			$this->payment,
+    			$this->price,
+    			$this->season,
+    			$this->created,
+    			$this->licence,
+    			$this->certificat
+    			) = unserialize($serialized);
     }
 }

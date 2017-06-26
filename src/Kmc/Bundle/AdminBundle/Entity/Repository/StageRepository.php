@@ -53,11 +53,12 @@ class StageRepository extends EntityRepository
 	public function countSubscription($id)
 	{
 		$qb = $this->createQueryBuilder('si')
-				   ->select('COUNT (a) as nb')
+				   ->select('COUNT (a.id) as nb')
 				   ->Join('KmcAdminBundle:StageSubscription','a')
-				   ->groupBy('a.id')
-				   ->where("si.id=a.stage  AND si.id=" . 2)
+				   ->groupBy('si.id')
+				   ->where("si.id=a.stage  AND si.id=" . $id)
 				   ->OrderBy("nb", 'desc');
 		$query = $qb->getQuery();
+		return $query->getResult();
 	}
 }

@@ -19,6 +19,7 @@ class StageController extends Controller
 		$member_email = $request->request->get('kmc_subscription_stage_member_mail');
 		$err = false;
 		$member_exist = false;
+		$valid = false;
 		
 		$repository_stage= $this->getDoctrine()->getRepository('KmcAdminBundle:Stage');
 		$stage = $repository_stage->findOneBy(array('urlKey' => $key_stage));
@@ -48,7 +49,7 @@ class StageController extends Controller
 			}
 		
 		}
-		$form = $this->createForm(new StageSubscriptionFormType(), $subscription);
+		$form = $this->createForm(StageSubscriptionFormType::class, $subscription);
 		$form->handleRequest($request);
     	if ($form->isValid()) {
     		$repository_stage = $this->getDoctrine()->getRepository('KmcAdminBundle:StageSubscription');
@@ -56,7 +57,7 @@ class StageController extends Controller
     		if(empty($exist_subscription))
     		{
 	    		$repository_member= $this->getDoctrine()->getRepository('KmcAdminBundle:Member');
-	    		$member = $repository_stage->findOneBy(array('email' => $subscription->getEmail()));
+	    		$member = $repository_member->findOneBy(array('email' => $subscription->getEmail()));
 	    		if($subscription->getAge()>=18)
 	    		{
 	    			$subscription->setMinor(0);
@@ -68,12 +69,13 @@ class StageController extends Controller
 	    		$em = $this->getDoctrine()->getManager();
 	    		$em->persist($subscription);
 	    		$em->flush();
+	    		$valid = true;
     		}else{
     			$err= "Vous vous êtes déja inscrit à ce stage";
     		}
     		
     		
     	}
-		return $this->render('KmcKmcBundle:Stage:DynamicForm.html.twig',array('stage'=>$stage, "member_exist"=>$member_exist,'form'=>$form->createView(), 'err'=>$err));
+		return $this->render('KmcKmcBundle:Stage:DynamicForm.html.twig',array('stage'=>$stage, "member_exist"=>$member_exist,'form'=>$form->createView(), 'err'=>$err,'valid'=>$valid));
 	}
 }

@@ -90,6 +90,7 @@ $(document).ready(function(){
 							data_custom[i] = { id:datas[2][i].id, label: datas[2][i].text };
 						}
 					}
+					console.log(data);
 					var html = '';
 					var firstid ='';
 					if (data_custom.length > 0)
@@ -160,6 +161,25 @@ $(document).ready(function(){
 			  }
 			})
 	});
+    
+    $("#editcertificatbutton").click(function(){
+    	//$("#content").hide();
+    	var id=$(this).parent().parent().find( "input" ).val();
+    	$.ajax({
+			  url: "/app_dev.php/admin/json/memberseason/"+id,
+			  dataType: "json",
+			  success: function(datas,filter_question)
+			  {
+				  	 if(datas.certificat != null)
+				  		 $('#divimg').html('<img width="100px" src="http://kmc.dev/admin/privatmembercertificatimage/'+id+'"/><input type="submit" class="btn btn-primary" name="delete" value="supprimer le certificat"/>');	
+				  	 $('#titlepopin').html(datas.season_name);
+				  	 $("#hiddenid").val(datas.id);
+				  	 $("#hiddenmemberid").val(datas.memberid)
+					 $("#loader").hide();
+				  	 $("#contentpopincertificat").show();
+			  }
+			})
+    });
 });
 
 function on_minor()
@@ -215,5 +235,4 @@ function checkAge(year,month,day)
     	$('#minor18').css('display','none');
     	$('#input_major').val("minor");
     }
-
 }

@@ -34,7 +34,8 @@
 	<thead>
 		<tr>
 			<th>Saison</th>
-			<th>tarif</th>
+			<th>Certificat</th>
+			<th>Tarif</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -42,6 +43,7 @@
 		{% for season in member.seasons%}
 		<tr>
 			<td>{{season.season.name}}</td>
+			<td>{% if season.certificat %} <a href="{{ path('kmc_admin_get_member_certificat', { 'member_season_id':season.id }) }}" target="_blank">Afficher le certificat</a> {% else %} Pas de certificat {% endif%}</td>
 			<td>{{season.price.price}} €</td>
 			<td style="width: 20%"><a type="button"
 				href="{{ path('kmc_admin_member_facture',{ 'member_id': member.id, 'season_id' : season.id }) }}"

@@ -28,17 +28,6 @@ class MemberRepository extends EntityRepository
 		if(count($where))
 			$qb->where(implode(" and ", $where));
 		$query = $qb->getQuery();
-		return $query->getResult();
-		/*$query = $this->getEntityManager()
-        			  ->createQuery(
-        			  		"SELECT m 
-							FROM KmcAdminBundle:Member m
-							JOIN KmcKmcBundle:Season s
-							JOIN KmcAdminBundle:MemberSeason ms
-							WHERE s.id = ms.season_id
-							AND m.id = ms.member
-							AND s.id =1"
-				        );
-			$query->getResult();*/		
+		return $query->getResult();	
 	}
 }

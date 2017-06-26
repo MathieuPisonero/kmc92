@@ -35,6 +35,11 @@ class StageSubscription
      */
     private $civility;
     
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="firstname", type="string", length=255)
+     */
     private $firstname;
 
     /**

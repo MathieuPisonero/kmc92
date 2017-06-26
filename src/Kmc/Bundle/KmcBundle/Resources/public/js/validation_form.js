@@ -113,4 +113,56 @@ $(document).ready(function(){
            form.submit();
         }
     });
+    
+    var validator_stage = $("#stage_subscription_form").validate({
+        rules: {
+            'stage_subscription_form[lastname]': "required",
+            'stage_subscription_form[firstname]': "required",
+            'stage_subscription_form[email]': {
+                required: true,
+                email: true
+            },
+            'stage_subscription_form[phone]': {
+                "required": true,
+                "regex": /^(\+33\.|0)[0-9]{9}$/
+            },
+           'stage_subscription_form[responsablelastname]': "required",
+           'stage_subscription_form[responsablefirstname]': "required",
+           'stage_subscription_form[birthdate][day]' : "required",
+           'stage_subscription_form[birthdate][month]' : "required",
+           'stage_subscription_form[birthdate][year]' : "required",
+           'subscription_form[phone]' : "required",
+           'subscription_form[civility]' : "required"
+            
+        },
+        errorPlacement: function(error, element) {},
+        highlight: function (element, errorClass, validClass) {
+            if($(element).attr('type')!= 'radio')
+            {
+                $(element).removeClass("classic");
+                $(element).addClass("error");
+            }
+            var errors = validator_stage.numberOfInvalids();
+            if (errors) {
+                var message = errors == 1
+                    ? 'Vous avez oublié 1 champ. Il est indiqué ci-dessous'
+                    : errors + ' champs ne sont pas correctement renseignés. Veuillez les vérifier ci-dessous';
+                $('#errorspan').html(message).show();
+            } else {
+                $('#errorspan').hide();
+            }
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            if($(element).attr('type')!= 'radio')
+            {
+                $(element).removeClass("error");
+                $(element).addClass("classic");
+            }
+        },
+		// specifying a submitHandler prevents the default submit, good for the demo
+		submitHandler: function() {
+			form.find('p.erreur').hide(0);
+			form.submit();
+		}
+	});
 });

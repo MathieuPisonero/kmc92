@@ -3,6 +3,7 @@
 namespace Kmc\Bundle\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * MemberSeason
@@ -36,6 +37,12 @@ class MemberSeason
      * @ORM\ManyToOne(targetEntity="\Kmc\Bundle\KmcBundle\Entity\Price")
      **/
     private $price;
+    
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\File(mimeTypes={ "image/jpeg" })
+     */
+    private $certificat;
     
     /**
      * Get id
@@ -114,5 +121,23 @@ class MemberSeason
     public function getPrice()
     {
     	return $this->price;
+    }
+    
+    /**
+     * Get certificat
+     */
+    public function getCertificat()
+    {
+    	return $this->certificat;
+    }
+    
+    /**
+     * Set certificat
+     */
+    public function setCertificat($certificat)
+    {
+    	$this->certificat= $certificat;
+    	
+    	return $this;
     }
 }

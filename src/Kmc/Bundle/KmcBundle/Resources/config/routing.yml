@@ -19,3 +19,6 @@ kmc_subscription_confirm:
 kmc_stage_home:
     path: /stage/{key_stage}
     defaults: { _controller: KmcKmcBundle:Stage:Index }
+kmc_get_tmp_certificat:
+    path: /privatetempcertificatimage
+    defaults: { _controller: KmcKmcBundle:GetPrivateCertificat:privateTempCertificatImage }

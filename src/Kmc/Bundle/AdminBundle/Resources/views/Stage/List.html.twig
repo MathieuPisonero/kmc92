@@ -24,15 +24,19 @@
                         <th>date</th>
                         <th>nb inscriptions</th>
                         <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for stage in stages %}
                         <tr class="gradeX">
-                        	<td>{{stage.name}}</td>
+                        	<td><a href="{{ path('kmc_stage_home', { 'key_stage': stage.urlKey }) }}" target="_blank">{{stage.name}}</a></td>
                             <td>{{ stage.dateStart|date('d/m/Y') }}</td>
-                            <td>{{stage.getCountSubscription()}}</td>
+                            <td>{{ subcount[stage.id]}}</td>
+                            <td style="width:2%;text-align:center"><button type="button" class="btn btn-primary" onclick="window.location='{{ path('kmc_admin_stage_sub_list', { 'stageId': stage.id }) }}';">Inscriptions</button></td>
                             <td style="width:2%;text-align:center"><button type="button" class="btn btn-primary" onclick="window.location='{{ path('kmc_admin_stage_edit', { 'stageId': stage.id }) }}';">Editer</button></td>
+                            <td style="width:2%;text-align:center"><button type="button" class="btn btn-primary" onclick="window.location='{{ path('kmc_admin_stage_edit', { 'stageId': stage.id }) }}';">Suppression</button></td>
                         </tr>
                     {% endfor %}
                     </tbody>

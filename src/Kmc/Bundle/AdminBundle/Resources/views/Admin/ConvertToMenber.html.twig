@@ -245,7 +245,12 @@ Convertir une inscription
 						</div>
 					</div>
 					{% endif %}
-					{{ form_row(form._token) }}
+					<div class="control-group">
+						<label class="control-label">Certificat</label>
+						<div class="controls">
+       						 <a href="{{ path('kmc_admin_get_certificat', { 'subscription_id':subscription_id })}}" target="_blank"><img src="{{ path('kmc_admin_get_certificat', { 'subscription_id':subscription_id })}}" width="50px" style="margin-lef:auto;margin-rigth:auto"></a>
+						</div>
+					</div>
 					<div class="form-actions">
 						<button type="submit" class="btn btn-primary">Enregistrer</button>
 					</div>

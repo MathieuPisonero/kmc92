@@ -76,3 +76,21 @@ kmc_admin_stage_edit:
 kmc_admin_stage_new:
     path:  /admin/stage/new
     defaults: { _controller: KmcAdminBundle:Stage:New}
+kmc_admin_stage_sub_list:
+    path: /admin/stage/sublist/{stageId}
+    defaults: { _controller: KmcAdminBundle:Stage:StageSubscriptionList}
+kmc_admin_stage_sub_extract:
+    path: /admin/stage/extract/{stageId}
+    defaults: { _controller: KmcAdminBundle:Stage:StageSubscriptionExtract}
+kmc_admin_stage_delete:
+    path: /admin/stage/extract/{stageId}
+    defaults: { _controller: KmcAdminBundle:Stage:DeleteStage}
+kmc_admin_get_certificat:
+    path: /admin/privatcertificatimage/{subscription_id}
+    defaults: { _controller: KmcAdminBundle:GetPrivateCertificat:privateCertificatImage }
+kmc_admin_get_member_certificat:
+    path: /admin/privatmembercertificatimage/{member_season_id}
+    defaults: { _controller: KmcAdminBundle:GetPrivateCertificat:privateMenberCertificatImage }
+kmc_admin_get_Json_memberseason:
+    path: /admin/json/memberseason/{member_season_id}
+    defaults: { _controller: KmcAdminBundle:Admin:getJsonMenberSeason }

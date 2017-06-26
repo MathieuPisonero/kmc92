@@ -146,6 +146,8 @@ Edition d'un membre
 							<tr>
 								<th></th>
 								<th>Saison</th>
+								<th>Certificat</th>
+								<th></th>
 								<th>tarif</th>
 							</tr>
 						</thead>
@@ -155,9 +157,11 @@ Edition d'un membre
 								<td style="width: 5%"><input type="checkbox"
 									value="{{season.id}}" name="supp_seasons[]"></td>
 								<td>{{season.season.name}}</td>
+								<td>{% if season.certificat %} <a href="{{ path('kmc_admin_get_member_certificat', { 'member_season_id':season.id }) }}" target="_blank">Afficher le certificat</a> {% else %} Pas de certificat {% endif%}</td>
+								<td><a id="editcertificatbutton" href="#editcertificat" data-toggle="modal" class="btn btn-primary">Modifier le certificat</a></td>
 								<td>{{season.price.price}} €</td>
 							<tr>
-								{% endfor%}
+							{% endfor%}
 						</tbody>
 					</table>
 				</div>
@@ -196,6 +200,35 @@ Edition d'un membre
 					</div>
 				</form>
 			</div>
+		</div>
+	</div>
+</div>
+<div id="editcertificat" class="modal hide">
+	<div class="modal-header">
+		<button data-dismiss="modal" class="close" type="button">×</button>
+		<h3 id="titlepopin">Modifier le certficat de la saison</h3>
+	</div>
+	<div class="modal-body">
+		<div id="loader" style="text-align:center">
+			<img src="\bundles\kmcadmin\img\icons\loading.gif" width="50%">
+		</div>
+		<div id="contentpopincertificat" class="widget-content nopadding" style="display:none">
+			<form name="kmc_admin_season" method="post" action="" class="form-horizontal ui-formwizard" novalidate="novalidate" enctype="multipart/form-data">
+				<input type="hidden" name="updateCertificat" value="updateCertificat" />
+				<div id="divimg" class="control-group">
+				</div>
+				<div class="control-group">
+					<label class="control-label">Image :</label>
+					<div class="controls">
+						<input type="file" id="title-checkbox" name="certificat" />
+						<input id="hiddenid" type="hidden" name="memberseason_id" value="">
+						<input id="hiddenmemberid" type="hidden" name="member_id" value="">
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary" name="save">Enregistrer</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
