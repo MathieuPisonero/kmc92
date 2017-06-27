@@ -47,9 +47,8 @@ class StageController extends Controller
 		$form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()) {
 			$file = $stage->getImage();
-			$fileName = md5(uniqid()).'.'.$file->guessExtension();
-			$file->move( $this->getParameter('imgstage_path'),$fileName );
-			$stage->setImage($fileName);
+			$helper = $this->get("kmc_kmc.imageloader");
+			$stage= $helper->uploadStageImage($file,$stage);
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($stage);
 			$em->flush();
@@ -70,13 +69,11 @@ class StageController extends Controller
 			$key = $repository->GenKey($stage->getName());
 			
 			$stage->setUrlKey($key);
-			$image = $request->files->get('image_club');
-			if(!empty($image))
-			{
-				$image->move('C:\Projects\KMC.2.0\kmc\web\img_stage', $image->getClientOriginalName());
-				$path = '/img_stage/'.$image->getClientOriginalName();
-				$stage->setImg($path);
-			}
+			$file = $stage->getImage();
+			//gestion de l'image
+			$helper = $this->get("kmc_kmc.imageloader");
+			$stage= $helper->uploadStageImage($file,$stage);
+			
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($stage);
 			$em->flush();

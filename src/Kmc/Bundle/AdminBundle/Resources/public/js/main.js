@@ -38,7 +38,7 @@ $(document).ready(function(){
 	$("[name=memberCard]").click(function(){
 		var member_id = $(this).attr('data');
 		$.ajax({
-				url: "/app_dev.php/admin/membercard/" + member_id,
+				url: "/admin/membercard/" + member_id,
 				success: function(data){
 					$("#content_member_card").html(data);
 			  }

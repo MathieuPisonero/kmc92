@@ -47,9 +47,10 @@ class SubscriptionController extends Controller
         if( $step == 1)
         {
             $subscription = $session->get('subscription');
+            $certificat = $request->getSession()->get('subscription')->getCertificat();
             
         }
-        $certificat = $request->getSession()->get('subscription')->getCertificat();
+        
         $form = $this->createForm(SubscriptionFormType::class, $subscription);
         $form->handleRequest($request);
         if ($form->isValid()) {
@@ -291,6 +292,7 @@ class SubscriptionController extends Controller
               //Fixe le club
               $subscription->setClub($club);
               $helper = $this->get("kmc_kmc.imageloader");
+              
               $subscription = $helper->saveCertificat($subscription);
               $em->persist($subscription);
               $em->flush();

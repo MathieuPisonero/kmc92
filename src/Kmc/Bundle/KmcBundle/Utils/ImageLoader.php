@@ -45,6 +45,8 @@ class ImageLoader
 	
 	public function saveCertificat(subscription $subscription)
 	{
+		if(empty($subscription->getCertificat()))
+			return $subscription;
 		$file = new File($subscription->getCertificat());
 		$file->move($this->container->getParameter("imgcertif_path"));
 		$subscription->setCertificat($this->container->getParameter("imgcertif_path").$file->getFilename());
@@ -53,6 +55,8 @@ class ImageLoader
 	
 	public function CopyMemberCertificat(subscription $subscription)
 	{
+		if(empty($subscription->getCertificat()))
+			return null;
 		$file = new File($subscription->getCertificat());
 		$fs = new Filesystem();
 		if($fs->exists($file->getPathname()))
@@ -71,7 +75,6 @@ class ImageLoader
 		$fs = new Filesystem();
 		$fs->remove($certificat);
 		$memberseason->setCertificat(null);
-		var_dump($memberseason->getCertificat());die();
 		return $memberseason;
 	}
 	
@@ -81,5 +84,15 @@ class ImageLoader
 		$file->move($this->container->getParameter("imgcertif_member_path"),$memberseason->getId().'.'.$file->getClientOriginalExtension());
 		$memberseason->setCertificat($this->container->getParameter("imgcertif_member_path") . $memberseason->getId().'.'.$file->getClientOriginalExtension());
 		return($memberseason);
+	}
+	
+	public function uploadStageImage($file ,$stage)
+	{
+		if(!empty($file))
+		{
+			$file->move($this->container->getParameter("imgstage_path"),$stage->getUrlKey().'.'.$file->getClientOriginalExtension());
+			$stage->setImage($this->container->getParameter("imgstage_URI") . $stage->getUrlKey().'.'.$file->getClientOriginalExtension());
+		}
+		return $stage;
 	}
 }
