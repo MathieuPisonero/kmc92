@@ -4,6 +4,11 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    kmcuserbundle.form.registration:
+        class: Kmc\Bundle\UserBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: kmc_user_registration }
+    kmcuserbundle.form.profil:
+        class: Kmc\Bundle\UserBundle\Form\ProfileType
+        tags:
+            - { name: form.type, alias: kmc_user_profile }

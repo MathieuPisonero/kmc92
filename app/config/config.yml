@@ -18,7 +18,9 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    #serializer:      { enable_annotations: true }
+    serializer:
+        enabled: true
+        enable_annotations: true
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
@@ -38,7 +40,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-        
+    paths:
+        "%kernel.root_dir%/../src/Kmc/Bundle/UserBundle/Resources/Views": KmcUserBundle    
 
 # Doctrine Configuration
 doctrine:
@@ -79,3 +82,57 @@ knp_snappy:
         enabled:    true
         binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
         options:    []
+fos_user:
+    db_driver:     orm                       # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
+    firewall_name: main                      # Le nom du firewall derrière lequel on utilisera ces utilisateurs
+    user_class:    Kmc\Bundle\UserBundle\Entity\User # La classe de l'entité User que nous utilisons
+    use_flash_notifications: true
+    from_email:
+        address: mathieu.pisonero@gmail.com
+        sender_name: mathieu
+    registration:
+        form:
+             type: Kmc\Bundle\UserBundle\Form\RegistrationType
+    profile:
+        form:
+             type: Kmc\Bundle\UserBundle\Form\ProfileType
+fos_rest:
+    routing_loader:
+        include_format: false
+    view:
+        view_response_listener: true
+    format_listener:
+        rules:
+            - { path: '^/api', priorities: ['json'], fallback_format: 'json' }
+            - { path: '^/uploadfile', priorities: ['json'], fallback_format: 'json' }
+            - { path: '^/token', priorities: ['json'], fallback_format: 'json' }
+            - { path: '^/', priorities: [ 'text/html', '*/*'], fallback_format: html, prefer_extension: true }
+            
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+    assets:
+        jquery_file_upload:
+            inputs:
+                - '@KmcAdminBundle/Resources/public/plugins/form/jquery-file-upload/js/jquery.iframe-transport.js'
+                - '@KmcAdminBundle/Resources/public/plugins/form/jquery-file-upload/js/jquery.fileupload.js'
+                - '@KmcAdminBundle/Resources/public/plugins/form/jquery-file-upload/js/jquery.fileupload-process.js'
+                - '@KmcAdminBundle/Resources/public/plugins/form/jquery-file-upload/js/jquery.fileupload-image.js'
+                - '@KmcAdminBundle/Resources/public/plugins/form/jquery-file-upload/js/jquery.fileupload-audio.js'
+                - '@KmcAdminBundle/Resources/public/plugins/form/jquery-file-upload/js/jquery.fileupload-video.js'
+                - '@KmcAdminBundle/Resources/public/plugins/form/jquery-file-upload/js/jquery.fileupload-validate.js'
+                - '@KmcAdminBundle/Resources/public/plugins/form/jquery-file-upload/js/jquery.fileupload-ui.js'
+        jquery_and_ui:
+           inputs:
+               - '@KmcAdminBundle/Resources/public/plugins/jquery/jquery-1.9.1.min.js'
+               - '@KmcAdminBundle/Resources/public/plugins/jquery/jquery-migrate-1.1.0.min.js'
+               - '@KmcAdminBundle/Resources/public/plugins/jquery/jquery.validate.min.js'
+               - '@KmcAdminBundle/Resources/public/plugins/jquery/jquery.validate.config.js'
+               - '@KmcAdminBundle/Resources/public/plugins/jquery-ui/ui/minified/jquery-ui.min.js'
+               - '@KmcAdminBundle/Resources/public/plugins/scrollbar/slimscroll/jquery.slimscroll.min.js'
+        base:
+           inputs:
+               - '@KmcAdminBundle/Resources/public/plugins/cookie/js/js.cookie.js'
+               - '@KmcAdminBundle/Resources/public/plugins/bootstrap/js/bootstrap.min.js'
