@@ -1,0 +1,44 @@
+services:
+    kmc.account:
+        class: Kmc\Bundle\UserBundle\Utils\Account
+        arguments: ["@service_container", "@doctrine.orm.entity_manager"]
+
+    kmc.authtoken:
+        class: Kmc\Bundle\UserBundle\Utils\AuthTokenHelper
+        arguments: ["@service_container", "@doctrine.orm.entity_manager"]
+
+    kmc.association:
+        class: Kmc\Bundle\UserBundle\Utils\AssociationHelper
+        arguments: ["@service_container", "@doctrine.orm.entity_manager"]
+
+    form.type.kmc_association:
+        class: Kmc\Bundle\UserBundle\Form\AssociationType
+        tags:
+            - {name: form.type, alias: kmc_association}
+        arguments: ["@security.token_storage"]
+
+    kmc.logoutlistener:
+        class: Kmc\Bundle\UserBundle\Listeners\LogoutListener
+        arguments:
+            userManager: "@fos_user.user_manager"
+            container: "@service_container"
+  
+    auth_token_user_provider:
+        class: Kmc\Bundle\UserBundle\Security\AuthTokenUserProvider
+        arguments: ["@auth_token_repository", "@user_repository"]
+        public:    false
+
+    auth_token_repository:
+        class:   Doctrine\ORM\EntityManager
+        factory: ["@doctrine.orm.entity_manager", "getRepository"]
+        arguments: ["KmcUserBundle:AuthToken"]
+
+    user_repository:
+        class:   Doctrine\ORM\EntityManager
+        factory: ["@doctrine.orm.entity_manager", "getRepository"]
+        arguments: ["KmcUserBundle:User"]
+
+    auth_token_authenticator:
+        class:     Kmc\Bundle\UserBundle\Security\AuthTokenAuthenticator
+        arguments: ["@security.http_utils"]
+        public:     false

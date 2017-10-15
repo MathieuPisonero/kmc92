@@ -1,7 +1,20 @@
 parameters:
-#    kmc_admin.example.class: Kmc\Bundle\AdminBundle\Example
+    kmc_admin.image.directory: 'C:/Projects/kmc92/var/app_image'
+    kmc_admin.image.club_logo.directory: 'club_logo'
+    kmc_admin.image.tmp.directory: 'tmp'
+    kmc_admin.image.defaut.directory: 'defaut'
 
 services:
-#    kmc_admin.example:
-#        class: %kmc_admin.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    kmc_admin.content.upload:
+        class: Kmc\Bundle\AdminBundle\Utils\Content\ContentUpload
+        arguments: ["@service_container", "@doctrine.orm.entity_manager","@security.token_storage"]
+   
+    kmc_admin.content.download:
+        class: Kmc\Bundle\AdminBundle\Utils\Content\ContentDownload
+        arguments: ["@service_container", "@doctrine.orm.entity_manager","@security.token_storage"]  
+    
+    kmc_admin.twig.image_alias:
+        class: Kmc\Bundle\AdminBundle\Twig\ImageAliasExtension
+        arguments: ["@service_container"]
+        tags:
+            - { name: twig.extension }

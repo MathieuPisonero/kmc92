@@ -1,0 +1,16 @@
+{% extends 'KmcAdminBundle::layout.html.twig' %}
+
+{% block page_level_js %}
+	{% javascripts '@KmcAdminBundle/Resources/public/js/apps.min.js'%}
+	<script src="{{ asset_url }}"></script>
+		{% endjavascripts %}	
+	<script src="{{ asset('bundles/kmcuser/js/page/profile.js')}}"></script>
+{% endblock page_level_js %}
+
+
+{% block content %}
+<div class="row">
+	{% include "@FOSUser/Profile/edit_content.html.twig" %}
+</div>
+
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+<div class="login">
+	<!-- BEGIN login-cover -->
+	<div class="login-cover"></div>
+	<!-- END login-cover -->
+	<!-- BEGIN login-content -->
+	<div class="login-content">
+		<!-- BEGIN login-brand -->
+		<div class="login-brand">
+			<a href="#"><span class="logo"><i class="ti-infinite"></i></span> ManKrav</a>
+		</div>
+		<!-- END login-brand -->
+		<!-- BEGIN login-desc -->
+		<div class="login-desc">
+			Pour accèder à votre espace personnel, merci de vous authentifier.
+		</div>
+		<!-- END login-desc -->
+		<!-- BEGIN login-form -->
+    		{{ include('@FOSUser/Security/login_content.html.twig') }}
+    	<!-- END login-form -->
+		<div class="m-t-20">
+			Pas de compte utilisateur ? <a href="{{path("fos_user_registration_register")}}">Créez votre utilisateur</a>
+		</div>
+	</div>
+	<!-- END login-content -->
+ </div>
+{% endblock fos_user_content %}

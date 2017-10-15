@@ -1,0 +1,25 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <!-- BEGIN register -->
+        <div class="register">
+        	<!-- BEGIN register-cover -->
+			<div class="register-cover"></div>
+			<!-- END register-cover -->
+			<!-- BEGIN register-content -->
+			<div class="register-content">
+				<!-- BEGIN register-brand -->
+				<div class="register-brand">
+					<a href="#"><span class="logo"><i class="ti-infinite"></i></span> ManKrav</a>
+				</div>
+				<!-- END register-brand -->
+				<h3 class="m-b-20"><span>Création de compte</span></h3>
+				 <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+    			<p><a href="{{path("fos_user_profile_show")}}">{{ 'registration.back'|trans }}</a></p>
+			</div>
+			<!-- END register-content -->
+        </div>
+        <!-- END register -->
+{% endblock fos_user_content %}

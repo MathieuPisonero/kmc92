@@ -1,0 +1,89 @@
+<!-- BEGIN tab-pane -->
+<div class="tab-pane fade" id="tab-left-profile">
+	<p>
+	Inclide tab
+	</p>
+	<!-- BEGIN panel -->
+	<div class="panel panel-default">
+		<!-- BEGIN panel-body -->
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table class="table m-b-0">
+					<thead>
+						<tr>
+							<th>NOM DU CLUB</th>
+							<th>VILLE</th>
+							<th>TELEPHONE</th>
+							<th style="width:1%">ACTIONS</th>
+						</tr>
+					</thead>
+					<tbody id="associationTab">
+					{% for association in associations %}
+							
+						<tr id="{{association.obj.id}}">
+							<td>{{association.obj.name}}</td>
+							<td>{% if association.obj.city %}{{association.obj.city}}{% else %}-{% endif  %}</td>
+							<td>{% if association.obj.phone %}{{association.obj.phone}}{% else %}-{% endif  %}</td>
+							<td class="btn-col" style="white-space: nowrap">
+								<a href="#default-modal" data-toggle="modal" name="edit" id="{{association.obj.id}}" class="btn btn-default btn-xs"><i class="ti-pencil"></i></a>
+								<a href="#confirm-modal" data-toggle="modal" name="delete" id="{{association.obj.id}}" class="btn btn-default btn-xs"><i class="ti-close"></i></a>
+							</td>
+						</tr>
+						{% for affilie in association.aff%}
+						<tr id="{{affilie.id}}" class="affiliated affId_{{association.obj.id}}">
+							<td><i class="ti-minus text-primary f-s-18 pull-left m-r-10"></i>{{affilie.name}}</td>
+							<td>{% if  affilie.city%}{{affilie.city}}{%else%}-{% endif  %}</td>
+							<td>{% if  affilie.phone %}{{affilie.phone}}{%else%}-{% endif  %}</td>
+							<td class="btn-col" style="white-space: nowrap">
+								<a href="#default-modal" data-toggle="modal" name="edit" id="{{affilie.id}}" class="btn btn-default btn-xs"><i class="ti-pencil"></i></a>
+								<a href="#confirm-modal" data-toggle="modal" name="delete" id="{{affilie.id}}" class="btn btn-default btn-xs"><i class="ti-close"></i></a>
+							</td>
+						</tr>
+						{% endfor %}
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- END panel-body -->
+	<a href="#default-modal" name="new" data-toggle="modal" class="btn btn-sm btn-primary">Ajouter un club</a>
+</div>
+<!-- END tab-pane -->
+
+<!-- BEGIN modal -->
+<div class="modal fade" id="default-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+				<h4 class="modal-title">Créer un club</h4>
+			</div>
+			<div class="modal-body" id="content_form">
+				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" id="save_form">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END modal -->
+
+<!-- BEGIN modal -->
+<div class="modal fade" id="confirm-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+				<h4 class="modal-title">Suppression d'un club</h4>
+			</div>
+			<p>Etes vous certain de vouloir supprimer ce club.</p>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" id="save_form">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END modal -->

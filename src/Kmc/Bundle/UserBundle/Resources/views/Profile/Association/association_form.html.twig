@@ -1,0 +1,65 @@
+{{ form_start(form_association, {'method': 'post', "attr":{'id': "kmc_user_association", 'class':"form-horizontal mw-100"}} ) }}
+		<div class="form-group">
+			<label class="control-label">Nom du club <span class="text-danger">*</span></label>
+			{{form_widget(form_association.name,{'attr':{'class':'form-control'}})}}
+			<span id="{{form_association.name.vars.id}}-error" class="help-block m-b-0" style="font-size: 9px;"></span>
+		</div>  		
+		<div class="form-group">
+			<label class="control-label">Adresse</label>
+			{{form_widget(form_association.adress1,{'attr':{'class':'form-control'}})}}
+			<span id="{{form_association.adress1.vars.id}}-error" class="help-block m-b-0"></span>
+		</div>
+		<div class="form-group">
+			<label class="control-label">Adresse complémentaire</label>
+			{{form_widget(form_association.adress2,{'attr':{'class':'form-control'}})}}
+			<span id="{{form_association.adress2.vars.id}}-error" class="help-block m-b-0"></span>
+		</div>  
+		<div class="form-group">
+			<label class="control-label">Code postal</label>
+			{{form_widget(form_association.zipcode,{'attr':{'class':'form-control'}})}}
+			<span id="{{form_association.zipcode.vars.id}}-error" class="help-block m-b-0"></span>
+		</div>
+		<div class="form-group">
+			<label class="control-label">Ville</label>
+			{{form_widget(form_association.city,{'attr':{'class':'form-control'}})}}
+			<span id="{{form_association.city.vars.id}}-error" class="help-block m-b-0"></span>
+		</div>
+		<div class="form-group">
+			<label class="control-label">Téléphone</label>
+			{{form_widget(form_association.phone,{'attr':{'class':'form-control'}})}}
+			<span id="{{form_association.phone.vars.id}}-error" class="help-block m-b-0"></span>
+		</div>
+		<div class="form-group">
+			<label class="control-label">Logo</label>
+			<div class="row">
+				<div class="col-md-4">
+					<span class="btn btn-primary fileinput-button btn-sm m-r-3 m-b-3">
+						<i class="glyphicon glyphicon-plus"></i>
+						<span>Add files...</span>
+						{{form_widget(form_association.logo,{'attr':{'class':'form-control','id':'kmc_user_association_logo'}})}}
+					</span>
+					<p id="progressinfo" style="display:none">Upload en cours...</p>
+					<div id="progressbar" class="progress m-b-10" style="display:none">
+						<div class="progress-bar" style="width: 0%;min-width: 2em;">0%</div>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<a href="#" class="thumbnail m-b-10">
+						{%set logo = form_association.vars.value|image_alias("club_logo")%}
+						{% if logo %}
+						<img id="img_container" src="{{logo}}" />
+						{%  else %}
+						<img id="img_container" src="{{ asset('bundles/kmcadmin/img/default.jpg') }}" />
+						{% endif %}
+					</a>	
+				</div>
+			</div>
+			<span id="{{form_association.phone.vars.id}}-error" class="help-block m-b-0"></span>
+		</div>
+		<div class="form-group">
+			<label class="control-label">Affilié au club : </label>
+			
+			{{form_widget(form_association.parentclub,{'attr':{'class':'form-control'}})}}
+			<span id="{{form_association.parentclub.vars.id}}-error" class="help-block m-b-0"></span>
+		</div>
+	</form>

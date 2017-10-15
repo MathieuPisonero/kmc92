@@ -1,56 +1,78 @@
 <!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
 <html lang="en">
-    <head>
-        <title>KMC 92 Admin</title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/bootstrap.min.css')}}" />
-        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/bootstrap-responsive.min.css')}}" />
-        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/colorpicker.css')}}" />
-        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/datepicker.css')}}" />
-        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/uniform.css')}}" />
-        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/select2.css')}}" />
-        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/fullcalendar.css')}}" />
-        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/unicorn.main.css')}}" />
-        <link rel="stylesheet" href="{{ asset('bundles/kmcadmin/css/unicorn.grey.css')}}" class="skin-color" />
-    </head>
-    <body>
-        <div id="header">
-            <h1><a href="{{ path('kmc_admin_homepage') }}">KMC 92 Admin</a></h1>
-        </div>		
-
-        <div id="sidebar">
-            <a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
-            {% block menu %}{% endblock %}
-        </div>
-
-        <div id="content">
-            <div id="content-header">
-                <h1>{% block title %}{% endblock %}</h1>
-            </div>
-            <div id="breadcrumb">
-                <a href="{{ path('kmc_admin_homepage') }}" title="Retour accueil" class="tip-bottom"><i class="icon-home"></i> Accueil</a>
-                {% block breadcrum %}{% endblock %}
-            </div>
-            <div class="container-fluid">
-                {% block content %}{% endblock %}
-            </div>
-        </div>
-
-        <script src="{{ asset('bundles/kmcadmin/js/jquery.min.js')}}"></script>
-        <script src="{{ asset('bundles/kmcadmin/js/jquery-ui.custom.js')}}"></script>
-        <script src="{{ asset('bundles/kmcadmin/js/bootstrap.min.js')}}"></script>
-        <script src="{{ asset('bundles/kmcadmin/js/bootstrap-colorpicker.js')}}"></script>
-        <script src="{{ asset('bundles/kmcadmin/js/bootstrap-datepicker.js')}}"></script>
-        <script src="{{ asset('bundles/kmcadmin/js/jquery.uniform.js')}}"></script>
-        <script src="{{ asset('bundles/kmcadmin/js/jquery.dataTables.min.js')}}"></script>
-        <script src="{{ asset('bundles/kmcadmin/js/select2.min.js')}}"></script>
-        <script src="{{ asset('bundles/kmcadmin/js/jquery.flot.min.js')}}"></script>
-        <script src="{{ asset('bundles/kmcadmin/js/jquery.flot.pie.min.js')}}"></script>
-        <script src="{{ asset('bundles/kmcadmin/js/jquery.flot.resize.min.js')}}"></script>
-        <script src="{{ asset('bundles/kmcadmin/js/unicorn.js')}}"></script>
-        <script src="{{ asset('bundles/kmcadmin/js/unicorn.form_common.js')}}"></script>
-        <script src="{{ asset('bundles/kmcadmin/js/unicorn.tables.js')}}"></script>
-        <script src="{{ asset('bundles/kmcadmin/js/main.js')}}"></script>
-    </body>
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<title>Infinite Admin | Dashboard</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="{{ asset('bundles/kmcadmin/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css')}}" rel="stylesheet" />
+	<link href="{{ asset('bundles/kmcadmin/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet " />
+	<link href="{{ asset('bundles/kmcadmin/plugins/icon/themify-icons/themify-icons.css')}}" rel="stylesheet" />
+	<link href="{{ asset('bundles/kmcadmin/css/animate.min.css')}}" rel="stylesheet" />
+	<link href="{{ asset('bundles/kmcadmin/css/style.min.css')}}" rel="stylesheet" />
+	
+	<link href="{{ asset('bundles/kmcadmin/plugins/form/jquery-file-upload/css/jquery.fileupload.css')}}" rel="stylesheet" />
+	
+	<!-- ================== END BASE CSS STYLE ================== -->
+	
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="{{ asset('bundles/kmcadmin/plugins/loader/pace/pace.min.js')}}"></script>
+	<!-- ================== END BASE JS ================== -->
+</head>
+<body>
+	<!-- BEGIN #page-container -->
+	<div id="page-container" class="page-header-fixed page-sidebar-fixed">
+		<!-- BEGIN #header -->
+			{{ include ("KmcAdminBundle::Include/header.html.twig") }}
+		<!-- END #header -->
+		
+		<!-- BEGIN #sidebar -->
+			{{ include ("KmcAdminBundle::Include/menu.html.twig") }}
+		<!-- END #sidebar -->
+		
+		<!-- BEGIN #content -->
+		<div id="content" class="content">
+			<!-- BEGIN page-header -->
+			<h1 class="page-header">
+				Dashboard <small>overview, analytics & report</small>
+			</h1>
+			<!-- END page-header -->
+			{% block content %}{% endblock %}
+		</div>
+		<!-- END #content -->
+		
+		<!-- BEGIN btn-scroll-top -->
+		<a href="#" data-click="scroll-top" class="btn-scroll-top fade"><i class="ti-arrow-up"></i></a>
+		<!-- END btn-scroll-top -->
+	</div>
+	<!-- END #page-container -->
+	
+	
+	<!-- ================== BEGIN BASE JS ================== -->
+		{% javascripts 	'@jquery_and_ui'
+						'@base'
+						'@jquery_file_upload'%}
+			<script src="{{ asset_url }}"></script>
+		{% endjavascripts %}
+	
+	<!-- ================== END BASE JS ================== -->
+	
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+	{% block page_level_js %}{% endblock page_level_js %}
+	<!-- ================== END PAGE LEVEL JS ================== -->
+	
+	<script>
+		$(document).ready(function() {
+			App.init();
+			Profile.init();
+			configLog = new Array('loadAssociationList','getTdPosition');
+		});
+	</script>
+</body>
 </html>

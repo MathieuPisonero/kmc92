@@ -1,0 +1,23 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% block fos_user_content %}
+<!-- BEGIN register -->
+        <div class="register">
+        	<!-- BEGIN register-cover -->
+			<div class="register-cover"></div>
+			<!-- END register-cover -->
+			<!-- BEGIN register-content -->
+			<div class="register-content">
+				<!-- BEGIN register-brand -->
+				<div class="register-brand">
+					<a href="#"><span class="logo"><i class="ti-infinite"></i></span> ManKrav</a>
+				</div>
+				<!-- END register-brand -->
+				<h3 class="m-b-20"><span>Création de compte</span></h3>
+				<p class="m-b-20">Inscrivez vous et créez votre compte utilisateur.</p>
+ 
+				{% include "@FOSUser/Registration/register_content.html.twig" %}
+			</div>
+			<!-- END register-content -->
+        </div>
+        <!-- END register -->
+ {% endblock %}

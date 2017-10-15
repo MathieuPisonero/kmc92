@@ -1,0 +1,36 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<!-- BEGIN panel -->
+<!-- BEGIN col-4 -->
+    <div class="col-md-12">
+		<div class="panel panel-default">
+			<!-- BEGIN panel-heading -->
+			<div class="panel-heading">
+				<h4 class="panel-title">Administrer votre compte</h4>
+			</div>
+			<!-- END panel-heading -->
+			<!-- BEGIN panel-body -->
+			<div class="panel-body">
+				<p class="desc">
+					Wrap with the <code>.nav-tabs-left</code>, <code>.nav-tabs-right</code> or <code>.nav-tabs-bottom</code> to adjust the tabs navigation position.
+				</p>
+				<!-- BEGIN nav-tabs-left -->
+				<div class="nav-tabs">
+					<!-- BEGIN nav-tabs -->
+					<ul class="nav nav-tabs" id="nav-tabs-left">
+						<li class="active"><a href="#tab-left-home" data-toggle="tab">Vos données personnelles</a></li>
+						<li><a href="#tab-left-profile" data-toggle="tab">Vos clubs</a></li>
+					</ul>
+					<!-- END nav-tabs -->
+					<!-- BEGIN tab-content -->
+					<div class="tab-content tab-content-bordered">
+						{% include "@KmcUserBundle/Profile/Profile/profile_form.html.twig" %}
+						{% include "@KmcUserBundle/Profile/Association/association_new.html.twig" %}
+					</div>
+					<!-- END tab-content -->
+				</div>
+				<!-- END nav-tabs-left -->
+			</div>
+			<!-- END panel-body -->
+	</div>
+	<!-- END panel -->
+</div>

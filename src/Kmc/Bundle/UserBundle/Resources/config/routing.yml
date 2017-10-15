@@ -1,0 +1,11 @@
+kmc_user_association_form:
+    path:  /admin/association/form/{id}
+    defaults: { _controller: KmcUserBundle:Association:GetAjaxForm, id: false}
+
+kmc_user_token:
+    path:  /token
+    defaults: { _controller: KmcUserBundle:AuthToken:GetAuthTokens }
+    
+association_rest:
+    type: rest
+    resource: Kmc\Bundle\UserBundle\Controller\AssociationRestController

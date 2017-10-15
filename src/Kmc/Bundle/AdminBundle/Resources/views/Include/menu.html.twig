@@ -1,33 +1,31 @@
-<ul style="display: block;">
-    <li {% if menu[0]=='home' %}class="active"{% endif %}><a href="{{ path('kmc_admin_homepage') }}"><i class="icon icon-home"></i> <span>Accueil</span></a></li>
-    <li  class="submenu {% if menu[0]=='Season' %}open active{% endif %}">
-        <a href="#"><i class="icon icon-th-list"></i> <span>Gestion des Saisons</span></a>
-        <ul>
-        	<li {% if menu[1]=='config' %}class="active"{% endif %}><a href="{{ path('kmc_admin_season') }}">Configuration de la Saison</a></li>
-            <li {% if menu[1]=='price' %}class="active"{% endif %}><a href={{ path('kmc_admin_price') }}>Tarif saison</a></li>
-        </ul>
-    </li>
-    <li  class="submenu {% if menu[0]=='member' %}open active{% endif %}">
-        <a href="#"><i class="icon icon-th-list"></i> <span>Gestion des Membres</span></a>
-        <ul>
-        	<li {% if menu[1]=='list' %}class="active"{% endif %}><a href="{{ path('kmc_admin_member_list_card') }}">Liste des membres</a></li>
-            <li {% if menu[1]=='card' %}class="active"{% endif %}><a href={{ path('kmc_admin_member_new_card') }}>Ajouter un membre</a></li>
-        </ul>
-    </li>
-    <li {% if menu[0]=='subscriptionlist' %}class="active"{% endif %}><a href="{{ path('kmc_admin_subscriptionlist') }}"><i class="icon icon-tint"></i> <span>Liste des inscrits</span></a></li>
-    <li {% if menu[0]=='club' %}class="active"{% endif %}> <a href="{{ path('kmc_admin_clublist') }}"><i class="icon icon-certificate"></i> <span>Gestion des clubs</span></a></li>
-    <li  class="submenu {% if menu[0]=='information' %}open active{% endif %}">
-        <a href="#"><i class="icon icon-th-list"></i> <span>Gestion du questionnaire</span></a>
-        <ul>
-        	<li {% if menu[1]=='edition' %}class="active"{% endif %}><a href="{{ path('kmc_admin_information_list') }}">Edition du questionnaire</a></li>
-            <li {% if menu[1]=='result' %}class="active"{% endif %}><a href={{ path('kmc_admin_information_result') }}>Résulats du questionnaire</a></li>
-        </ul>
-    </li>
-    <li  class="submenu {% if menu[0]=='stage' %}open active{% endif %}">
-        <a href="#"><i class="icon icon-th-list"></i> <span>Gestion des stages</span></a>
-        <ul>
-        	<li {% if menu[1]=='list' %}class="active"{% endif %}><a href="{{ path('kmc_admin_stage') }}">Liste des stages</a></li>
-            <li {% if menu[1]=='new' %}class="active"{% endif %}><a href={{ path('kmc_admin_stage_new') }}>Ajouter un stage</a></li>
-        </ul>
-    </li>
-    </ul>
+		<div id="sidebar" class="sidebar sidebar-inverse">
+			<!-- BEGIN scrollbar -->
+			<div data-scrollbar="true" data-height="100%">
+				<!-- BEGIN nav -->
+				<ul class="nav">
+					<li class="nav-header">Navigation</li>
+					<li class="active"><a href="index.html"><i class="ti-home"></i><span>Home</span></a></li>
+					<li class="nav-divider"></li>
+					<li class="nav-header">Components</li>
+					<li><a href="widgets.html"><i class="ti-shortcode"></i><span>Widgets</span></a></li>
+					<li class="has-sub">
+						<a href="javascript:;">
+						    <b class="caret caret-right pull-right"></b>
+						    <i class="ti-heart"></i>
+						    <span>UI Kits</span> 
+						</a>
+						<ul class="sub-menu">
+							<li><a href="ui_bootstrap.html">Bootstrap</a></li>
+							<li><a href="ui_buttons.html">Buttons</a></li>
+							<li><a href="ui_typography.html">Typography</a></li>
+							<li><a href="ui_tabs_accordions.html">Tabs & Accordions</a></li>
+							<li><a href="ui_modal_notification.html">Modal & Notification</a></li>
+							<li><a href="ui_panels.html">Panels</a></li>
+							<li><a href="ui_icons.html">Icons</a></li>
+						</ul>
+					</li>
+				</ul>
+				<!-- END nav -->
+			</div>
+			<!-- END scrollbar -->
+		</div>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<title>Infinite Admin | Dashboard</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="{{ asset('bundles/kmcadmin/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css')}}" rel="stylesheet" />
+	<link href="{{ asset('bundles/kmcadmin/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet')}}" />
+	<link href="{{ asset('bundles/kmcadmin/assets/plugins/icon/themify-icons/themify-icons.css')}}" rel="stylesheet" />
+	<link href="{{ asset('bundles/kmcadmin/assets/css/animate.min.css')}}" rel="stylesheet" />
+	<link href="{{ asset('bundles/kmcadmin/assets/css/style.min.css')}}" rel="stylesheet" />
+	<!-- ================== END BASE CSS STYLE ================== -->
+	
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="{{ asset('bundles/kmcadmin/assets/plugins/loader/pace/pace.min.js')}}"></script>
+	<!-- ================== END BASE JS ================== -->
+</head>
+<body>
+	<!-- BEGIN #page-container -->
+	<div id="page-container" class="page-header-fixed page-sidebar-fixed">
+		<!-- BEGIN #header -->
+			{{ include ("KmcAdminBundle::Include/header.html.twig") }}
+		<!-- END #header -->
+		
+		<!-- BEGIN #sidebar -->
+			{{ include ("KmcAdminBundle::Include/menu.html.twig") }}
+		<!-- END #sidebar -->
+		
+		<!-- BEGIN #content -->
+			{% block content %}{% endblock %}
+		<!-- END #content -->
+		
+		<!-- BEGIN btn-scroll-top -->
+		<a href="#" data-click="scroll-top" class="btn-scroll-top fade"><i class="ti-arrow-up"></i></a>
+		<!-- END btn-scroll-top -->
+	</div>
+	<!-- END #page-container -->
+	
+	
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="{{ asset('bundles/kmcadmin/assets/plugins/jquery/jquery-1.9.1.min.js')}}"></script>
+	<script src="{{ asset('bundles/kmcadmin/assets/plugins/jquery/jquery-migrate-1.1.0.min.js')}}"></script>
+	<script src="{{ asset('bundles/kmcadmin/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js')}}"></script>
+	<script src="{{ asset('bundles/kmcadmin/assets/plugins/cookie/js/js.cookie.js')}}"></script>
+	<script src="{{ asset('bundles/kmcadmin/assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+	<script src="{{ asset('bundles/kmcadmin/assets/plugins/scrollbar/slimscroll/jquery.slimscroll.min.js')}}"></script>
+	<!-- ================== END BASE JS ================== -->
+	
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+	<script src="{{ asset('bundles/kmcadmin/assets/plugins/chart/chart-js/Chart.min.js')}}"></script>
+	<script src="{{ asset('bundles/kmcadmin/assets/js/page/dashboard.demo.min.js')}}"></script>
+	<script src="{{ asset('bundles/kmcadmin/assets/js/apps.min.js')}}"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
+	
+	<script>
+		$(document).ready(function() {
+			App.init();
+			Dashboard.init();
+		});
+	</script>
+</body>
+</html>

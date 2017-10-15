@@ -1,0 +1,6 @@
+kmc_uploadfile:
+    path:  /contentupload/{attr}
+    defaults: { _controller: KmcAdminBundle:Content:Upload }
+kmc_contentdl:
+    path: /contentdownload/{context}/{filename}
+    defaults: { _controller: KmcAdminBundle:Content:Download }

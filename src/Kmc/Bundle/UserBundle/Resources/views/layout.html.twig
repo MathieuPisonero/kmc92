@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<title>Infinite Admin | Login</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="{{ asset('bundles/kmcuser/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css')}}" rel="stylesheet" />
+	<link href="{{ asset('bundles/kmcuser/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet " />
+	<link href="{{ asset('bundles/kmcuser/ets/plugins/icon/themify-icons/themify-icons.css')}}" rel="stylesheet" />
+	<link href="{{ asset('bundles/kmcuser/css/animate.min.css')}}" rel="stylesheet" />
+	<link href="{{ asset('bundles/kmcuser/css/style.css')}}" rel="stylesheet" />
+	<!-- ================== END BASE CSS STYLE ================== -->
+	
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="{{ asset('bundles/kmcuser/plugins/loader/pace/pace.min.js')}}"></script>
+	<!-- ================== END BASE JS ================== -->
+</head>
+<body class="inverse-mode">
+	<!-- BEGIN #page-container -->
+	<div id="page-container">
+	{% if app.request.hasPreviousSession %}
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                    <div class="flash-{{ type }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+	<!-- BEGIN login -->
+		{% block fos_user_content %}
+        {% endblock fos_user_content %}
+	<!-- END login -->
+		<!-- BEGIN btn-scroll-top -->
+		<a href="#" data-click="scroll-top" class="btn-scroll-top fade"><i class="ti-arrow-up"></i></a>
+		<!-- END btn-scroll-top -->
+	</div>
+	<!-- END #page-container -->
+	
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="{{ asset('bundles/kmcuser/plugins/jquery/jquery-1.9.1.min.js')}}"></script>
+	<script src="{{ asset('bundles/kmcuser/plugins/jquery/jquery-migrate-1.1.0.min.js')}}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/kmcuser/plugins/jquery/jquery.validate.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/kmcuser/plugins/jquery/jquery.validate.config.js') }}"></script>
+	<script src="{{ asset('bundles/kmcuser/plugins/jquery-ui/ui/minified/jquery-ui.min.js')}}"></script>
+	<script src="{{ asset('bundles/kmcuser/plugins/cookie/js/js.cookie.js')}}"></script>
+	<script src="{{ asset('bundles/kmcuser/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+	<script src="{{ asset('bundles/kmcuser/plugins/scrollbar/slimscroll/jquery.slimscroll.min.js')}}"></script>
+	
+	<!-- ================== END BASE JS ================== -->
+	
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+	<script src="{{ asset('bundles/kmcuser/js/apps.min.js')}}"></script>
+	<script src="{{ asset('bundles/kmcuser/js/page/register_validation_form.js')}}"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
+	
+	<script>
+		$(document).ready(function() {
+			App.init();
+		});
+	</script>
+</body>
+</html>

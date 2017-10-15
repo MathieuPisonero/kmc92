@@ -94,3 +94,5 @@ kmc_admin_get_member_certificat:
 kmc_admin_get_Json_memberseason:
     path: /admin/json/memberseason/{member_season_id}
     defaults: { _controller: KmcAdminBundle:Admin:getJsonMenberSeason }
+kmc_upload_file:
+    resource: "@KmcAdminBundle/Resources/config/controller/routing/content.yml"

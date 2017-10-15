@@ -53,8 +53,7 @@ class AdminController extends Controller
     	$err =false;
     	$repository_season= $this->getDoctrine()
     	->getRepository('KmcKmcBundle:Season');
-    	$seasons = $repository_season->findById($id);
-    	$season = $seasons[0];
+    	$season = $repository_season->find($id);
     	$form = $this->createForm(SeasonFormType::class, $season);
     	$form->handleRequest($request);
     	if ($form->isValid()) {

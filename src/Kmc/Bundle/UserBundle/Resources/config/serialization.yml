@@ -1,0 +1,18 @@
+Kmc\Bundle\UserBundle\Entity\Association:
+    attributes:
+        id:
+            groups: ['auth-token']
+        name:
+            groups: ['auth-token']
+        adress1:
+            groups: ['auth-token']
+        adress2:
+            groups: ['auth-token']
+        zipcode:
+            groups: ['auth-token']
+        city:
+            groups: ['auth-token']
+        phone:
+            groups: ['auth-token']
+        parentclub:
+            groups: ['auth-token']
